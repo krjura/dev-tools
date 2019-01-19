@@ -1,27 +1,21 @@
 package org.krjura.devtools.controllers
 
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
+import org.springframework.http.server.reactive.ServerHttpResponse
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
-import javax.servlet.http.HttpServletResponse
+import java.net.URI
 
 @Controller
 class PortalController {
 
     companion object {
-        const val ROOT_PAGE = "/portal/index.html";
+        val ROOT_PAGE = URI("/portal/index.html");
     }
 
-    @GetMapping("/")
-    fun rootRedirect(response: HttpServletResponse) {
-        response.setStatus(HttpStatus.FOUND.value());
-        response.setHeader(HttpHeaders.LOCATION, ROOT_PAGE)
-    }
-
-    @GetMapping("/portal")
-    fun portalRedirect(response: HttpServletResponse) {
-        response.setStatus(HttpStatus.FOUND.value());
-        response.setHeader(HttpHeaders.LOCATION, ROOT_PAGE)
+    @GetMapping(value = ["/", "/portal"])
+    fun rootRedirect(response: ServerHttpResponse) {
+        response.statusCode = HttpStatus.FOUND;
+        response.headers.location = ROOT_PAGE;
     }
 }

@@ -3,25 +3,22 @@ package org.krjura.devtools.support
 import com.fasterxml.jackson.core.JsonProcessingException
 import org.junit.runner.RunWith
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
-import org.springframework.web.context.WebApplicationContext
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Before
 import java.io.IOException
-import org.springframework.test.web.servlet.MvcResult
+import org.springframework.test.web.reactive.server.WebTestClient
+import org.springframework.context.ApplicationContext
+
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @ProjectTest
 abstract class TestBase {
 
     @Autowired
-    lateinit var context: WebApplicationContext
+    lateinit var context: ApplicationContext;
 
-    lateinit var mockMvc: MockMvc
+    lateinit var webClient: WebTestClient;
 
     @Autowired
     lateinit var objectMapper: ObjectMapper;
@@ -29,20 +26,15 @@ abstract class TestBase {
     @Before
     fun beforeTestBase() {
 
-        mockMvc = MockMvcBuilders
-            .webAppContextSetup(this.context)
-            .apply<DefaultMockMvcBuilder>(springSecurity())
+        this.webClient = WebTestClient
+            .bindToApplicationContext(context)
+            //.apply(springSecurity())
             .build();
     }
 
     @Throws(JsonProcessingException::class)
     fun toJson(value: Any): String {
         return this.objectMapper.writeValueAsString(value);
-    }
-
-    @Throws(IOException::class)
-    fun <T> fromJson(result: MvcResult, clazz: Class<T>): T {
-        return fromJson(result.response.contentAsString, clazz)
     }
 
     @Throws(IOException::class)
