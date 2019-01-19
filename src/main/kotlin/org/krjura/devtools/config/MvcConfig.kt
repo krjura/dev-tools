@@ -11,14 +11,8 @@ class MvcConfig : WebMvcConfigurer {
 
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         registry
-            .addResourceHandler("/web/**")
-            .addResourceLocations("file:web-resources/web/")
+            .addResourceHandler("/portal/**")
+            .addResourceLocations("file:web-resources/")
             .setCachePeriod(0)
-
-        registry
-            .addResourceHandler("/js/**")
-            .addResourceLocations("file:web-resources/js/")
-            .setCachePeriod(0)
-
     }
 }

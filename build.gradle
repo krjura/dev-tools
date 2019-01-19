@@ -24,8 +24,8 @@ apply plugin: 'io.spring.dependency-management'
 group = 'org.krjura.devtools'
 version = '1.0'
 
-sourceCompatibility = '1.10'
-targetCompatibility = '1.10'
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
@@ -62,3 +62,43 @@ compileTestKotlin {
         jvmTarget = '1.8'
     }
 }
+
+jar {
+    enabled = true
+}
+
+bootJar {
+    classifier = 'boot'
+    archiveName = 'devtools-root-boot.jar'
+}
+
+// Custom scripts
+def buildVersionCalculator() {
+
+    println "calculating build version"
+
+    def buildNumber = System.env.BUILD_NUMBER;
+
+    if(buildNumber == null) {
+        println "BUILD_NUMBER not set failing back to default version";
+        return project.version;
+    }
+
+    if(!buildNumber.isNumber() ) {
+        println "BUILD_NUMBER ${System.env.BUILD_NUMBER} is not a number";
+        return project.version;
+    }
+
+    buildNumber = buildNumber as int;
+
+    if(buildNumber <= 0) {
+        println("BUILD_NUMBER must be larger then 0 but was ${buildNumber}");
+        return project.version;
+    }
+
+    def updatedVersion = version + "." + buildNumber;
+    println "version is now ${updatedVersion}";
+
+    return updatedVersion;
+}
+
