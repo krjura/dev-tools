@@ -1,0 +1,25 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+server:
+  servlet:
+    context-path: /
+    session:
+      timeout: 3600
+  port: 25000
+  use-forward-headers: true
+  tomcat:
+    protocolHeader: x-forwarded-proto
+    portHeader: x-forwarded-port
+    remoteIpHeader: x-forwarded-for
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  pid:
+    file: dev-tools.pid
+  application:
+    name: dev-tools

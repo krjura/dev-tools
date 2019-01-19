@@ -1,0 +1,9 @@
+.expand-textarea {
+  height: auto;
+  width: 100%;
+  resize: none;
+}
+
+.base64-encode-result-header {
+  font-size: 14px;
+}
