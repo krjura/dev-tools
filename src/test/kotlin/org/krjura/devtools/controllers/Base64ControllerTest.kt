@@ -19,7 +19,7 @@ class Base64ControllerTest : TestBase() {
         val result: FluxExchangeResult<ByteArray> = webClient
             .post()
             .uri("/api/v1/base64/decode")
-            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .contentType(MediaType.TEXT_PLAIN)
             .body(Mono.just(request), ByteArray::class.java)
             .exchange()
             .expectStatus().isOk

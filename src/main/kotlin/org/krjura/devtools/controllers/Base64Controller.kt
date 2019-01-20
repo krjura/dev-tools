@@ -1,6 +1,6 @@
 package org.krjura.devtools.controllers
 
-import org.krjura.devtools.StopWatchUtils
+import org.krjura.devtools.utils.StopWatchUtils
 import org.krjura.devtools.enums.CustomHeaders
 import org.krjura.devtools.services.Base64Service
 import org.springframework.http.HttpHeaders
@@ -16,7 +16,7 @@ class Base64Controller(private val base64Service: Base64Service) {
 
     @PostMapping(
         value = ["/api/v1/base64/decode"],
-        consumes = [MediaType.APPLICATION_OCTET_STREAM_VALUE],
+        consumes = [MediaType.TEXT_PLAIN_VALUE],
         produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE]
     )
     fun decodeBase64Bytes(

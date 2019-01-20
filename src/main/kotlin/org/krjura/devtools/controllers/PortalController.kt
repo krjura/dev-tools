@@ -18,4 +18,10 @@ class PortalController {
         response.statusCode = HttpStatus.FOUND;
         response.headers.location = ROOT_PAGE;
     }
+
+    @GetMapping(value = ["*"])
+    fun subPageRedirect(response: ServerHttpResponse) {
+        response.statusCode = HttpStatus.FOUND;
+        response.headers.location = ROOT_PAGE;
+    }
 }
