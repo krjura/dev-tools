@@ -1,6 +1,10 @@
 package org.krjura.devtools.controllers
 
+import org.krjura.devtools.StopWatchUtils
+import org.krjura.devtools.enums.CustomHeaders
 import org.krjura.devtools.services.Base64Service
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
@@ -18,7 +22,14 @@ class Base64Controller(private val base64Service: Base64Service) {
     fun decodeBase64Bytes(
         @RequestBody request: ByteArray): ResponseEntity<ByteArray> {
 
-        return ResponseEntity.ok(base64Service.decodeBytes(request))
+        val (duration, result) = StopWatchUtils
+            .execute { base64Service.decodeBytes(request) };
+
+        val headers = HttpHeaders();
+        headers.add(CustomHeaders.DURATION, duration.toString())
+
+        return ResponseEntity(result, headers, HttpStatus.OK)
+
     }
 
     @PostMapping(
@@ -29,6 +40,12 @@ class Base64Controller(private val base64Service: Base64Service) {
     fun encodeBase64Bytes(
         @RequestBody request: ByteArray): ResponseEntity<String> {
 
-        return ResponseEntity.ok(base64Service.encodeBytes(request));
+        val (duration, result) = StopWatchUtils
+            .execute { base64Service.encodeBytes(request) };
+
+        val headers = HttpHeaders();
+        headers.add(CustomHeaders.DURATION, duration.toString())
+
+        return ResponseEntity(result, headers, HttpStatus.OK)
     }
 }

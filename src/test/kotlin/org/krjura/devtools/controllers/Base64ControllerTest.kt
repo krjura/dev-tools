@@ -2,6 +2,7 @@ package org.krjura.devtools.controllers
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.krjura.devtools.enums.CustomHeaders
 import org.krjura.devtools.support.TestBase
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.FluxExchangeResult
@@ -22,6 +23,7 @@ class Base64ControllerTest : TestBase() {
             .body(Mono.just(request), ByteArray::class.java)
             .exchange()
             .expectStatus().isOk
+            .expectHeader().exists(CustomHeaders.DURATION)
             .returnResult(ByteArray::class.java);
 
         assertThat(result.responseBodyContent).isEqualTo(byteArrayOf(116, 101, 115, 116, 100, 97, 116, 97))
@@ -40,6 +42,7 @@ class Base64ControllerTest : TestBase() {
             .body(Mono.just(request), ByteArray::class.java)
             .exchange()
             .expectStatus().isOk
+            .expectHeader().exists(CustomHeaders.DURATION)
             .returnResult(ByteArray::class.java);
 
         assertThat(result.responseBodyContent).isEqualTo("dGVzdGRhdGE=".toByteArray(StandardCharsets.UTF_8))
