@@ -5,11 +5,11 @@ import { Base64DecoderComponent } from './pages/base64-decoder/base64-decoder.co
 
 const routes: Routes = [
   {
-    path: 'base64-encoder',
+    path: 'op/base64-encoder',
     component: Base64EncoderComponent
   },
   {
-    path: 'base64-decoder',
+    path: 'op/base64-decoder',
     component: Base64DecoderComponent
   },
 ];

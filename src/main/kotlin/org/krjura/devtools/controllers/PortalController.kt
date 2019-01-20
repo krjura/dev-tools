@@ -1,27 +1,18 @@
 package org.krjura.devtools.controllers
 
-import org.springframework.http.HttpStatus
+import org.springframework.core.io.FileSystemResource
+import org.springframework.core.io.Resource
+import org.springframework.http.ResponseEntity
 import org.springframework.http.server.reactive.ServerHttpResponse
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
-import java.net.URI
+import java.nio.file.Paths
 
 @Controller
 class PortalController {
 
-    companion object {
-        val ROOT_PAGE = URI("/portal/index.html");
-    }
-
-    @GetMapping(value = ["/", "/portal"])
-    fun rootRedirect(response: ServerHttpResponse) {
-        response.statusCode = HttpStatus.FOUND;
-        response.headers.location = ROOT_PAGE;
-    }
-
-    @GetMapping(value = ["*"])
-    fun subPageRedirect(response: ServerHttpResponse) {
-        response.statusCode = HttpStatus.FOUND;
-        response.headers.location = ROOT_PAGE;
+    @GetMapping(value = ["/", "/portal", "/portal/op/**"])
+    fun rootRedirect(response: ServerHttpResponse): ResponseEntity<Resource> {
+        return ResponseEntity.ok(FileSystemResource(Paths.get("web-resources/index.html")))
     }
 }
