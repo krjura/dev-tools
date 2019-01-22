@@ -1,0 +1,117 @@
+package org.krjura.devtools.controllers
+
+import org.junit.Test
+import org.krjura.devtools.controllers.bcrypt.pojo.BCryptWebRequest
+import org.krjura.devtools.controllers.bcrypt.pojo.BCryptWebResponse
+import org.krjura.devtools.enums.CustomHeaders
+import org.krjura.devtools.support.TestBase
+import org.springframework.http.MediaType
+import reactor.core.publisher.Mono
+import org.assertj.core.api.Assertions.assertThat
+import org.krjura.devtools.ex.response.ErrorResponse
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import reactor.core.publisher.toMono
+
+class BCryptControllerTest: TestBase() {
+
+    @Test
+    fun testSimpleEncode() {
+
+        val request = BCryptWebRequest(10, "password");
+
+        val response = webClient
+            .post()
+            .uri("/api/v1/bcrypt/password")
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .body(Mono.just(request), BCryptWebRequest::class.java)
+            .exchange()
+            .expectStatus().isOk
+            .expectHeader().exists(CustomHeaders.DURATION)
+            .returnResult(BCryptWebResponse::class.java)
+
+
+        val responseBody = response.responseBody.toMono().block();
+
+        assertThat(response).isNotNull
+        assertThat(responseBody).isNotNull
+        assertThat(responseBody?.iterations).isEqualTo(10)
+        assertThat(responseBody?.data).isEqualTo("password")
+        assertThat(responseBody?.encoded).isNotNull()
+        assertThat(BCryptPasswordEncoder(10).matches("password", responseBody?.encoded)).isTrue()
+    }
+
+    @Test
+    fun testSimpleEncodeUpperOutOfRange() {
+
+        val request = BCryptWebRequest(20, "password");
+
+        val response = webClient
+            .post()
+            .uri("/api/v1/bcrypt/password")
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .body(Mono.just(request), BCryptWebRequest::class.java)
+            .exchange()
+            .expectStatus().isBadRequest
+            .returnResult(ErrorResponse::class.java)
+
+        val responseBody = response.responseBody.toMono().block();
+        assertThat(response).isNotNull
+        assertThat(responseBody).isNotNull
+        assertThat(responseBody?.details).hasSize(1)
+        assertThat(responseBody?.details?.get(0)?.reason).isEqualTo("class.BcryptIterationConstraint")
+        assertThat(responseBody?.details?.get(0)?.message).isEqualTo("class.BcryptIterationConstraint")
+        assertThat(responseBody?.details?.get(0)?.attributeName).isEqualTo("iterations")
+        assertThat(responseBody?.details?.get(0)?.attributeValues).hasSize(1)
+        assertThat(responseBody?.details?.get(0)?.attributeValues?.get(0)).isEqualTo("20")
+    }
+
+    @Test
+    fun testSimpleEncodeBottomOutOfRange() {
+
+        val request = BCryptWebRequest(0, "password");
+
+        val response = webClient
+            .post()
+            .uri("/api/v1/bcrypt/password")
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .body(Mono.just(request), BCryptWebRequest::class.java)
+            .exchange()
+            .expectStatus().isBadRequest
+            .returnResult(ErrorResponse::class.java)
+
+        val responseBody = response.responseBody.toMono().block();
+        assertThat(response).isNotNull
+        assertThat(responseBody).isNotNull
+        assertThat(responseBody?.details).hasSize(1)
+        assertThat(responseBody?.details?.get(0)?.reason).isEqualTo("class.BcryptIterationConstraint")
+        assertThat(responseBody?.details?.get(0)?.message).isEqualTo("class.BcryptIterationConstraint")
+        assertThat(responseBody?.details?.get(0)?.attributeName).isEqualTo("iterations")
+        assertThat(responseBody?.details?.get(0)?.attributeValues).hasSize(1)
+        assertThat(responseBody?.details?.get(0)?.attributeValues?.get(0)).isEqualTo("0")
+    }
+
+    @Test
+    fun testSimpleEncodeEmptyData() {
+
+        val request = BCryptWebRequest(10, "");
+
+        val response = webClient
+            .post()
+            .uri("/api/v1/bcrypt/password")
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .body(Mono.just(request), BCryptWebRequest::class.java)
+            .exchange()
+            .expectStatus().isBadRequest
+            .returnResult(ErrorResponse::class.java)
+
+        val responseBody = response.responseBody.toMono().block();
+        assertThat(response).isNotNull
+        assertThat(responseBody).isNotNull
+        assertThat(responseBody?.details).hasSize(1)
+        assertThat(responseBody?.details?.get(0)?.reason).isEqualTo("class.BCryptDataConstraint")
+        assertThat(responseBody?.details?.get(0)?.message).isEqualTo("class.BCryptDataConstraint")
+        assertThat(responseBody?.details?.get(0)?.attributeName).isEqualTo("data")
+        assertThat(responseBody?.details?.get(0)?.attributeValues).hasSize(1)
+        assertThat(responseBody?.details?.get(0)?.attributeValues?.get(0)).isEqualTo("")
+    }
+}

@@ -42,6 +42,9 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    // javax.validation
+    implementation 'org.hibernate:hibernate-validator:6.0.13.Final'
+
     // logging
     implementation 'org.slf4j:slf4j-api'
     implementation 'ch.qos.logback:logback-classic'
