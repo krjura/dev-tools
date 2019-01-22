@@ -1,4 +1,4 @@
-package org.krjura.devtools.services
+package org.krjura.devtools.features.bcrypt.services
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service

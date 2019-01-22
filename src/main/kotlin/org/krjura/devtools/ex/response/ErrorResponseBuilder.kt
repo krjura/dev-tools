@@ -28,22 +28,28 @@ class ErrorDetailBuilder(private val parent: ErrorResponseBuilder) {
     private var attributeName: String? = null
     private var attributeValues: MutableList<String> = ArrayList()
 
-    fun reason(reason: String): ErrorDetailBuilder {
-        Objects.requireNonNull(reason)
+    fun reason(reason: String?): ErrorDetailBuilder {
+        if(reason == null) {
+            return this;
+        }
 
         this.reason = reason
         return this
     }
 
-    fun attributeName(attributeName: String): ErrorDetailBuilder {
-        Objects.requireNonNull(attributeName)
+    fun attributeName(attributeName: String?): ErrorDetailBuilder {
+        if(attributeName == null) {
+            return this;
+        }
 
         this.attributeName = attributeName
         return this
     }
 
-    fun message(message: String): ErrorDetailBuilder {
-        Objects.requireNonNull(message)
+    fun message(message: String?): ErrorDetailBuilder {
+        if(message == null) {
+            return this;
+        }
 
         this.message = message
         return this

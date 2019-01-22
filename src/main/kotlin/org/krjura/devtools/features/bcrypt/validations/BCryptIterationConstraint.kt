@@ -1,10 +1,10 @@
-package org.krjura.devtools.controllers.validations
+package org.krjura.devtools.features.bcrypt.validations
 
 import javax.validation.Constraint
 import javax.validation.ReportAsSingleViolation
-import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.Max
+import javax.validation.constraints.Min
 import javax.validation.constraints.NotNull
-import javax.validation.constraints.Size
 import kotlin.reflect.KClass
 
 @MustBeDocumented
@@ -13,10 +13,10 @@ import kotlin.reflect.KClass
 @Retention(AnnotationRetention.RUNTIME)
 @ReportAsSingleViolation
 @NotNull
-@NotEmpty
-@Size(min = 1, max = 100)
-annotation class BCryptDataConstraint(
-    val message: String = "class.BCryptDataConstraint",
+@Max(15)
+@Min(1)
+annotation class BCryptIterationConstraint(
+    val message: String = "class.BcryptIterationConstraint",
     val groups: Array<KClass<out Any>> = [],
     val payload: Array<KClass<out Any>> = []
 )

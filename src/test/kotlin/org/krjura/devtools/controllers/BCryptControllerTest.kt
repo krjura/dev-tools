@@ -1,14 +1,14 @@
 package org.krjura.devtools.controllers
 
 import org.junit.Test
-import org.krjura.devtools.controllers.bcrypt.pojo.BCryptWebRequest
-import org.krjura.devtools.controllers.bcrypt.pojo.BCryptWebResponse
 import org.krjura.devtools.enums.CustomHeaders
 import org.krjura.devtools.support.TestBase
 import org.springframework.http.MediaType
 import reactor.core.publisher.Mono
 import org.assertj.core.api.Assertions.assertThat
 import org.krjura.devtools.ex.response.ErrorResponse
+import org.krjura.devtools.features.bcrypt.pojo.BCryptWebRequest
+import org.krjura.devtools.features.bcrypt.pojo.BCryptWebResponse
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import reactor.core.publisher.toMono
 

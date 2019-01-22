@@ -1,8 +1,8 @@
-package org.krjura.devtools.controllers
+package org.krjura.devtools.features.base64.controllers
 
 import org.krjura.devtools.utils.StopWatchUtils
 import org.krjura.devtools.enums.CustomHeaders
-import org.krjura.devtools.services.Base64Service
+import org.krjura.devtools.features.base64.services.Base64Service
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType

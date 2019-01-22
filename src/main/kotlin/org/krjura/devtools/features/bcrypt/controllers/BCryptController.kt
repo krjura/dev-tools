@@ -1,10 +1,9 @@
-package org.krjura.devtools.controllers.bcrypt
+package org.krjura.devtools.features.bcrypt.controllers
 
-import org.krjura.devtools.controllers.bcrypt.pojo.BCryptWebRequest
-import org.krjura.devtools.controllers.bcrypt.pojo.BCryptWebResponse
+import org.krjura.devtools.features.bcrypt.pojo.BCryptWebRequest
+import org.krjura.devtools.features.bcrypt.pojo.BCryptWebResponse
 import org.krjura.devtools.enums.CustomHeaders
-import org.krjura.devtools.ex.response.ErrorResponseBuilder
-import org.krjura.devtools.services.BCryptService
+import org.krjura.devtools.features.bcrypt.services.BCryptService
 import org.krjura.devtools.utils.StopWatchUtils
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus

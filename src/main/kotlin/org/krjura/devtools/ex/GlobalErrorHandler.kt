@@ -1,5 +1,7 @@
-package org.krjura.devtools.ex.response
+package org.krjura.devtools.ex
 
+import org.krjura.devtools.ex.response.ErrorResponse
+import org.krjura.devtools.ex.response.ErrorResponseBuilder
 import org.springframework.web.bind.annotation.ControllerAdvice
 import java.util.ArrayList
 import org.springframework.web.bind.annotation.ResponseBody
