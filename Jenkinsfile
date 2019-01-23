@@ -34,6 +34,7 @@ def build() {
 
           stage('Build backend') {
             docker.image('docker.krjura.org/dev-tools/java-build-env:v1').inside("-v dev-tools-gradle-cache:${GRADLE_USER_HOME}") {
+              sh './gradlew --version'
               sh './gradlew --no-daemon -Dspring.profiles.active=test,jenkins bootJar'
             }
           }
