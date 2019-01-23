@@ -32,12 +32,14 @@ class BCryptControllerTest: TestBase() {
 
         val responseBody = response.responseBody.toMono().block();
 
-        assertThat(response).isNotNull
         assertThat(responseBody).isNotNull
-        assertThat(responseBody?.iterations).isEqualTo(10)
-        assertThat(responseBody?.data).isEqualTo("password")
-        assertThat(responseBody?.encoded).isNotNull()
-        assertThat(BCryptPasswordEncoder(10).matches("password", responseBody?.encoded)).isTrue()
+
+        responseBody?.let {
+            assertThat(responseBody.iterations).isEqualTo(10)
+            assertThat(responseBody.data).isEqualTo("password")
+            assertThat(responseBody.encoded).isNotNull()
+            assertThat(BCryptPasswordEncoder(10).matches("password", responseBody.encoded)).isTrue()
+        }
     }
 
     @Test
@@ -55,14 +57,17 @@ class BCryptControllerTest: TestBase() {
             .returnResult(ErrorResponse::class.java)
 
         val responseBody = response.responseBody.toMono().block();
-        assertThat(response).isNotNull
+
         assertThat(responseBody).isNotNull
-        assertThat(responseBody?.details).hasSize(1)
-        assertThat(responseBody?.details?.get(0)?.reason).isEqualTo("class.BcryptIterationConstraint")
-        assertThat(responseBody?.details?.get(0)?.message).isEqualTo("class.BcryptIterationConstraint")
-        assertThat(responseBody?.details?.get(0)?.attributeName).isEqualTo("iterations")
-        assertThat(responseBody?.details?.get(0)?.attributeValues).hasSize(1)
-        assertThat(responseBody?.details?.get(0)?.attributeValues?.get(0)).isEqualTo("20")
+
+        responseBody?.let {
+            assertThat(responseBody.details).hasSize(1)
+            assertThat(responseBody.details.get(0).reason).isEqualTo("class.BcryptIterationConstraint")
+            assertThat(responseBody.details.get(0).message).isEqualTo("class.BcryptIterationConstraint")
+            assertThat(responseBody.details.get(0).attributeName).isEqualTo("iterations")
+            assertThat(responseBody.details.get(0).attributeValues).hasSize(1)
+            assertThat(responseBody.details.get(0).attributeValues.get(0)).isEqualTo("20")
+        }
     }
 
     @Test
@@ -80,14 +85,17 @@ class BCryptControllerTest: TestBase() {
             .returnResult(ErrorResponse::class.java)
 
         val responseBody = response.responseBody.toMono().block();
-        assertThat(response).isNotNull
+
         assertThat(responseBody).isNotNull
-        assertThat(responseBody?.details).hasSize(1)
-        assertThat(responseBody?.details?.get(0)?.reason).isEqualTo("class.BcryptIterationConstraint")
-        assertThat(responseBody?.details?.get(0)?.message).isEqualTo("class.BcryptIterationConstraint")
-        assertThat(responseBody?.details?.get(0)?.attributeName).isEqualTo("iterations")
-        assertThat(responseBody?.details?.get(0)?.attributeValues).hasSize(1)
-        assertThat(responseBody?.details?.get(0)?.attributeValues?.get(0)).isEqualTo("0")
+
+        responseBody?.let {
+            assertThat(responseBody.details).hasSize(1)
+            assertThat(responseBody.details.get(0).reason).isEqualTo("class.BcryptIterationConstraint")
+            assertThat(responseBody.details.get(0).message).isEqualTo("class.BcryptIterationConstraint")
+            assertThat(responseBody.details.get(0).attributeName).isEqualTo("iterations")
+            assertThat(responseBody.details.get(0).attributeValues).hasSize(1)
+            assertThat(responseBody.details.get(0).attributeValues.get(0)).isEqualTo("0")
+        }
     }
 
     @Test
@@ -105,13 +113,15 @@ class BCryptControllerTest: TestBase() {
             .returnResult(ErrorResponse::class.java)
 
         val responseBody = response.responseBody.toMono().block();
-        assertThat(response).isNotNull
+
         assertThat(responseBody).isNotNull
-        assertThat(responseBody?.details).hasSize(1)
-        assertThat(responseBody?.details?.get(0)?.reason).isEqualTo("class.BCryptDataConstraint")
-        assertThat(responseBody?.details?.get(0)?.message).isEqualTo("class.BCryptDataConstraint")
-        assertThat(responseBody?.details?.get(0)?.attributeName).isEqualTo("data")
-        assertThat(responseBody?.details?.get(0)?.attributeValues).hasSize(1)
-        assertThat(responseBody?.details?.get(0)?.attributeValues?.get(0)).isEqualTo("")
+        responseBody?.let {
+            assertThat(responseBody.details).hasSize(1)
+            assertThat(responseBody.details.get(0).reason).isEqualTo("class.BCryptDataConstraint")
+            assertThat(responseBody.details.get(0).message).isEqualTo("class.BCryptDataConstraint")
+            assertThat(responseBody.details.get(0).attributeName).isEqualTo("data")
+            assertThat(responseBody.details.get(0).attributeValues).hasSize(1)
+            assertThat(responseBody.details.get(0).attributeValues.get(0)).isEqualTo("")
+        }
     }
 }
