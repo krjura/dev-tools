@@ -14,7 +14,7 @@ import kotlin.reflect.KClass
 @ReportAsSingleViolation
 @NotNull
 @Max(15)
-@Min(1)
+@Min(4)
 annotation class BCryptIterationConstraint(
     val message: String = "class.BcryptIterationConstraint",
     val groups: Array<KClass<out Any>> = [],
