@@ -56,7 +56,17 @@
               rows="4">
 
             </textarea>
-            <button class="btn btn-primary mt-4" type="button" (click)="downloadData(index)"> Download data </button>
+            <div class="row">
+              <div class="col-md-12 mt-4">
+                <button
+                  class="btn btn-primary"
+                  type="button" (click)="downloadData(index)"> Download data </button>
+                <button
+                  class="btn btn-primary ml-4"
+                  [disabled]="isDataCopied"
+                  (click)="copyDataToClipboard(index)"> {{ isDataCopied ? "Copied" : "Copy To Clipboard" }}</button>
+              </div>
+            </div>
           </div>
           <div class="col-md-6">
             <p class="base64-encode-result-header"> Value </p>
@@ -66,7 +76,18 @@
               rows="4">
 
             </textarea>
-            <button class="btn btn-primary mt-4" type="button" (click)="downloadValue(index)"> Download result </button>
+            <div class="row">
+              <div class="col-md-12 mt-4">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  (click)="downloadValue(index)"> Download result </button>
+                <button
+                  class="btn btn-primary ml-4"
+                  [disabled]="isResultCopied"
+                  (click)="copyResultToClipboard(index)"> {{ isResultCopied ? "Copied" : "Copy To Clipboard" }}</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

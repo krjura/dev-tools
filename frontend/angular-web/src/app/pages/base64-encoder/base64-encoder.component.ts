@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ClipboardService } from 'ngx-clipboard';
+
 import { Base64EncodeResultModel } from './base64-encode-result.model';
 
 @Component({
@@ -14,8 +16,12 @@ export class Base64EncoderComponent implements OnInit {
   };
 
   results: Base64EncodeResultModel[] = [];
+  isResultCopied = false;
+  isDataCopied = false;;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private clipboardService: ClipboardService) {
 
   }
 
@@ -58,5 +64,31 @@ export class Base64EncoderComponent implements OnInit {
 
     window.open(url, '_blank');
     window.URL.revokeObjectURL(url);
+  }
+
+  copyResultToClipboard(index) {
+    this.isResultCopied = this.clipboardService.copyFromContent(this.results[index].value);
+    this.clearResultToClipboard();
+  }
+
+  clearResultToClipboard() {
+    const that = this;
+
+    setTimeout(function () {
+      that.isResultCopied = false;
+    }, 2000);
+  }
+
+  copyDataToClipboard(index: number) {
+    this.isDataCopied = this.clipboardService.copyFromContent(this.results[index].data);
+    this.clearDataToClipboard();
+  }
+
+  clearDataToClipboard() {
+    const that = this;
+
+    setTimeout(function () {
+      that.isDataCopied = false;
+    }, 2000);
   }
 }

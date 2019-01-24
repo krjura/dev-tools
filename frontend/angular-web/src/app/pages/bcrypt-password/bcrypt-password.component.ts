@@ -16,6 +16,8 @@ export class BCryptPasswordComponent implements OnInit {
 
   result: BCryptWebResponseModel = null;
 
+  isContentCopied = false;
+
   constructor(
     private http: HttpClient,
     private clipboardService: ClipboardService) {
@@ -56,7 +58,16 @@ export class BCryptPasswordComponent implements OnInit {
       return;
     }
 
-    this.clipboardService.copyFromContent(this.result.encoded);
+    this.isContentCopied = this.clipboardService.copyFromContent(this.result.encoded);
+    this.clearContentCopied();
+  }
+
+  clearContentCopied() {
+    const that = this;
+
+    setTimeout(function () {
+      that.isContentCopied = false;
+    }, 2000);
   }
 
   clearResult() {
