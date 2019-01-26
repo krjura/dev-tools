@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
+
 import { ClipboardService } from 'ngx-clipboard';
 
 import { Base64EncodeResultModel } from './base64-encode-result.model';
@@ -12,9 +15,7 @@ import { GlobalAlertService } from '../../shared/services/global-alert.service';
 })
 export class Base64EncoderComponent implements OnInit {
 
-  model = {
-    data: ''
-  };
+  form: FormGroup;
 
   results: Base64EncodeResultModel[] = [];
   isResultCopied = false;
@@ -22,13 +23,19 @@ export class Base64EncoderComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
+    private fb: FormBuilder,
     private clipboardService: ClipboardService,
     private alertService: GlobalAlertService) {
 
   }
 
   ngOnInit() {
-
+    this.form = this.fb.group({
+      data: [
+        '',
+        [Validators.required, Validators.minLength(1)]
+      ]
+    });
   }
 
   encodeData() {
@@ -40,11 +47,11 @@ export class Base64EncoderComponent implements OnInit {
       .http
       .post(
         '/api/v1/base64/encode',
-        this.model.data,
+        this.form.controls.data.value,
         {headers: headers, responseType: 'text', withCredentials: true})
       .subscribe(result => {
-        this.results.unshift({data: this.model.data, value: result});
-        this.model.data = '';
+        this.results.unshift({data: this.form.controls.data.value, value: result});
+        this.form.controls.data.patchValue('');
       }, httpErrorResponse => {
 
       this.alertService.errorResponseAlert(httpErrorResponse.error);

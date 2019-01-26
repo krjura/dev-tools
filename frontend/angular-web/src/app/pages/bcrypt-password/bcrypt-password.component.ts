@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 import { ClipboardService } from 'ngx-clipboard';
 import { GlobalAlertService } from '../../shared/services/global-alert.service';
@@ -11,10 +13,7 @@ import { GlobalAlertService } from '../../shared/services/global-alert.service';
 })
 export class BCryptPasswordComponent implements OnInit {
 
-  model = {
-    iterations : 10,
-    data: ''
-  };
+  form: FormGroup;
 
   result: BCryptWebResponseModel = null;
 
@@ -22,17 +21,24 @@ export class BCryptPasswordComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
+    private fb: FormBuilder,
     private clipboardService: ClipboardService,
     private alertService: GlobalAlertService) {
 
   }
 
   ngOnInit() {
-
+    this.form = this.fb.group({
+      iterations: [4],
+      data: [
+        '',
+        [Validators.required, Validators.maxLength(100), Validators.minLength(1)]
+      ]
+    });
   }
 
   execute() {
-    if (this.model.data === null || this.model.data.length === 0) {
+    if (this.form.controls.data.value === null || this.form.controls.data.value.length === 0) {
       return;
     }
 
@@ -41,8 +47,8 @@ export class BCryptPasswordComponent implements OnInit {
       .append('Accept', 'application/json;charset=UTF-8');
 
     const request = {
-      iterations: this.model.iterations,
-      data: this.model.data
+      iterations: this.form.controls.iterations.value,
+      data: this.form.controls.data.value
     };
 
     this
@@ -60,7 +66,7 @@ export class BCryptPasswordComponent implements OnInit {
   }
 
   copyData() {
-    if (this.model.data === null || this.model.data.length ===  0) {
+    if (this.form.controls.data.value === null || this.form.controls.data.value.length === 0) {
       return;
     }
 

@@ -11,7 +11,7 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
-            <form role="form" novalidate="">
+            <form role="form" novalidate="" [formGroup]="form">
               <div class="form-group">
                 <label>Data</label>
                 <textarea
@@ -19,7 +19,7 @@
                   name="encodeData"
                   class="form-control expand-textarea"
                   rows="4"
-                  [(ngModel)]="model.data"
+                  formControlName="data"
                   >
 
                 </textarea>
@@ -28,6 +28,7 @@
               <button
                 type="submit"
                 class="btn btn-default"
+                [disabled]="!form.valid"
                 (click)="encodeData()"> {{ 'pages.base64Encoder.form.submit' | translate }} </button>
             </form>
           </div>

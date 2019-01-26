@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { Base64EncoderComponent } from './pages/base64-encoder/base64-encoder.component';
@@ -27,6 +28,7 @@ import { GlobalAlertService } from './shared/services/global-alert.service';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
 

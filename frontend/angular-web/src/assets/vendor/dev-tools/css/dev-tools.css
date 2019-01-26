@@ -21,3 +21,7 @@
 .clear-float {
   clear: both;
 }
+
+.not-valid {
+  color: red;
+}
