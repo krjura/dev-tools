@@ -16,7 +16,7 @@ import kotlin.reflect.KClass
 @NotEmpty
 @Size(min = 1, max = 100)
 annotation class BCryptDataConstraint(
-    val message: String = "class.BCryptDataConstraint",
+    val message: String = "alerts.backend.constraints.class.BCryptDataConstraint",
     val groups: Array<KClass<out Any>> = [],
     val payload: Array<KClass<out Any>> = []
 )

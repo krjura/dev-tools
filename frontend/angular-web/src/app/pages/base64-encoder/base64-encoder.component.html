@@ -1,11 +1,11 @@
-<h1 class="page-header">Base64 Encoder</h1>
+<h1 class="page-header"> {{ 'pages.base64Encoder.pageTitle' | translate }}</h1>
 
 <div class="row">
   <div class="col-md-12">
 
     <div class="panel panel-primary">
       <div class="panel-heading">
-        Encoding Data
+        {{ 'pages.base64Encoder.pageHeading' | translate }}
       </div>
 
       <div class="panel-body">
@@ -28,7 +28,7 @@
               <button
                 type="submit"
                 class="btn btn-default"
-                (click)="encodeData()"> Encode </button>
+                (click)="encodeData()"> {{ 'pages.base64Encoder.form.submit' | translate }} </button>
             </form>
           </div>
         </div>
@@ -43,13 +43,13 @@
 
       <div class="panel-heading">
         <button class="close" type="button" (click)="removeResult(index)">x</button>
-        Encoding result
+        {{ 'pages.base64Encoder.result.title' | translate }}
       </div>
 
       <div class="panel-body">
         <div class="row">
           <div class="col-md-6">
-            <p class="base64-encode-result-header"> Data </p>
+            <p class="base64-encode-result-header"> {{ 'pages.base64Encoder.result.data' | translate }} </p>
             <textarea
               class="expand-textarea"
               [value]="result.data"
@@ -60,16 +60,22 @@
               <div class="col-md-12 mt-4">
                 <button
                   class="btn btn-primary"
-                  type="button" (click)="downloadData(index)"> Download data </button>
+                  type="button" (click)="downloadData(index)"> {{ 'pages.base64Encoder.result.downloadData' | translate }} </button>
                 <button
                   class="btn btn-primary ml-4"
                   [disabled]="isDataCopied"
-                  (click)="copyDataToClipboard(index)"> {{ isDataCopied ? "Copied" : "Copy To Clipboard" }}</button>
+                  (click)="copyDataToClipboard(index)">
+                    {{
+                      isDataCopied
+                        ? ('pages.base64Encoder.clipboard.copied' | translate)
+                        : ('pages.base64Encoder.clipboard.copy' | translate)
+                    }}
+                </button>
               </div>
             </div>
           </div>
           <div class="col-md-6">
-            <p class="base64-encode-result-header"> Value </p>
+            <p class="base64-encode-result-header"> {{ 'pages.base64Encoder.result.value' | translate }} </p>
             <textarea
               class="expand-textarea"
               [value]="result.value"
@@ -81,11 +87,17 @@
                 <button
                   class="btn btn-primary"
                   type="button"
-                  (click)="downloadValue(index)"> Download result </button>
+                  (click)="downloadValue(index)"> {{ 'pages.base64Encoder.result.downloadResult' | translate }} </button>
                 <button
                   class="btn btn-primary ml-4"
                   [disabled]="isResultCopied"
-                  (click)="copyResultToClipboard(index)"> {{ isResultCopied ? "Copied" : "Copy To Clipboard" }}</button>
+                  (click)="copyResultToClipboard(index)">
+                    {{
+                      isResultCopied
+                      ? ('pages.base64Encoder.clipboard.copied' | translate)
+                      : ('pages.base64Encoder.clipboard.copy' | translate)
+                    }}
+                </button>
               </div>
             </div>
           </div>

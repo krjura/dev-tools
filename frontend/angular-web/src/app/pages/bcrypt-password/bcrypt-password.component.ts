@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { ClipboardService } from 'ngx-clipboard';
+import { GlobalAlertService } from '../../shared/services/global-alert.service';
 
 @Component({
   selector: 'app-bcrypt-password',
@@ -20,7 +22,8 @@ export class BCryptPasswordComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private clipboardService: ClipboardService) {
+    private clipboardService: ClipboardService,
+    private alertService: GlobalAlertService) {
 
   }
 
@@ -50,6 +53,9 @@ export class BCryptPasswordComponent implements OnInit {
         {headers: headers, responseType: 'json', withCredentials: true})
       .subscribe(response => {
         this.result = response;
+      }, httpErrorResponse => {
+
+          this.alertService.errorResponseAlert(httpErrorResponse.error);
       });
   }
 

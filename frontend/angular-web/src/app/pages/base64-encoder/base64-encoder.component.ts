@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ClipboardService } from 'ngx-clipboard';
 
 import { Base64EncodeResultModel } from './base64-encode-result.model';
+import { GlobalAlertService } from '../../shared/services/global-alert.service';
 
 @Component({
   selector: 'app-base64-encoder',
@@ -17,11 +18,12 @@ export class Base64EncoderComponent implements OnInit {
 
   results: Base64EncodeResultModel[] = [];
   isResultCopied = false;
-  isDataCopied = false;;
+  isDataCopied = false;
 
   constructor(
     private http: HttpClient,
-    private clipboardService: ClipboardService) {
+    private clipboardService: ClipboardService,
+    private alertService: GlobalAlertService) {
 
   }
 
@@ -43,7 +45,10 @@ export class Base64EncoderComponent implements OnInit {
       .subscribe(result => {
         this.results.unshift({data: this.model.data, value: result});
         this.model.data = '';
-      });
+      }, httpErrorResponse => {
+
+      this.alertService.errorResponseAlert(httpErrorResponse.error);
+    });
   }
 
   removeResult(index: number) {

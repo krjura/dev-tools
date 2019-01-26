@@ -2,5 +2,8 @@
 
 @import "assets/vendor/bootstrap/css/bootstrap.css";
 @import "assets/vendor/font-awesome/css/font-awesome.css";
+
+@import '~ngx-toastr/toastr.css';
+
 @import "assets/vendor/sb-admin/css/sb-admin-2.css";
 @import "assets/vendor/dev-tools/css/dev-tools.css";

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { GlobalAlertService } from '../../shared/services/global-alert.service';
+
 @Component({
   selector: 'app-base64-decoder',
   templateUrl: './base64-decoder.component.html',
@@ -12,7 +14,9 @@ export class Base64DecoderComponent implements OnInit {
     data: ''
   };
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private alertService: GlobalAlertService) {
 
   }
 
@@ -37,6 +41,9 @@ export class Base64DecoderComponent implements OnInit {
         this.download(file);
 
         this.model.data = '';
+      }, httpErrorResponse => {
+
+        this.alertService.errorResponseAlert(httpErrorResponse.error);
       });
   }
 

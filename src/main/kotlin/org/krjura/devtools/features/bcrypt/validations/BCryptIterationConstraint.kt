@@ -16,7 +16,7 @@ import kotlin.reflect.KClass
 @Max(15)
 @Min(4)
 annotation class BCryptIterationConstraint(
-    val message: String = "class.BcryptIterationConstraint",
+    val message: String = "alerts.backend.constraints.class.BcryptIterationConstraint",
     val groups: Array<KClass<out Any>> = [],
     val payload: Array<KClass<out Any>> = []
 )
