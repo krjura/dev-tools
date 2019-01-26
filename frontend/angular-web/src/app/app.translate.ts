@@ -11,6 +11,26 @@ export const translateEn = {
     }
   },
   pages: {
+    passwordGenerator: {
+      pageHeader: "Password Generator",
+      panelHeading: "Password Configuration",
+      form: {
+        config: {
+          title: "Characters",
+          useCapitalLetters: "Use capital letters",
+          useSmallLetters: "Use small letters",
+          useNumbers: "Use numbers",
+          length: 'Length of password',
+          submit: 'Generate'
+        }
+      },
+      results: {
+        panelHeading: "GeneratedPasswords",
+        copied: "Copied",
+        copyToClipboard: "Copy to clipboard",
+        noData: "No passwords are generated at this point"
+      }
+    },
     base64Decoder: {
       pageHeader: 'Base64 Decoder',
       pageHeading: 'Decoding data',

@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { Base64EncoderComponent } from './pages/base64-encoder/base64-encoder.component';
 import { Base64DecoderComponent } from './pages/base64-decoder/base64-decoder.component';
 import { BCryptPasswordComponent } from './pages/bcrypt-password/bcrypt-password.component';
+import { PasswordGeneratorComponent } from "./pages/password-generator/password-generator.component";
 
 import { GlobalAlertService } from './shared/services/global-alert.service';
 
@@ -22,7 +23,8 @@ import { GlobalAlertService } from './shared/services/global-alert.service';
     AppComponent,
     Base64EncoderComponent,
     Base64DecoderComponent,
-    BCryptPasswordComponent
+    BCryptPasswordComponent,
+    PasswordGeneratorComponent
   ],
   imports: [
     BrowserModule,

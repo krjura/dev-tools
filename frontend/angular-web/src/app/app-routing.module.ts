@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { Base64EncoderComponent } from './pages/base64-encoder/base64-encoder.component';
 import { Base64DecoderComponent } from './pages/base64-decoder/base64-decoder.component';
 import { BCryptPasswordComponent } from './pages/bcrypt-password/bcrypt-password.component';
+import { PasswordGeneratorComponent } from "./pages/password-generator/password-generator.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
     path: 'op/bcrypt-password',
     component: BCryptPasswordComponent
   },
+  {
+    path: 'op/password-generator',
+    component: PasswordGeneratorComponent
+  }
 ];
 
 @NgModule({

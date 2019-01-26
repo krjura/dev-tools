@@ -62,8 +62,8 @@ class BCryptControllerTest: TestBase() {
 
         responseBody?.let {
             assertThat(responseBody.details).hasSize(1)
-            assertThat(responseBody.details.get(0).reason).isEqualTo("class.BcryptIterationConstraint")
-            assertThat(responseBody.details.get(0).message).isEqualTo("class.BcryptIterationConstraint")
+            assertThat(responseBody.details.get(0).reason).isEqualTo("alerts.backend.constraints.class.BcryptIterationConstraint")
+            assertThat(responseBody.details.get(0).message).isEqualTo("alerts.backend.constraints.class.BcryptIterationConstraint")
             assertThat(responseBody.details.get(0).attributeName).isEqualTo("iterations")
             assertThat(responseBody.details.get(0).attributeValues).hasSize(1)
             assertThat(responseBody.details.get(0).attributeValues.get(0)).isEqualTo("20")
@@ -90,8 +90,8 @@ class BCryptControllerTest: TestBase() {
 
         responseBody?.let {
             assertThat(responseBody.details).hasSize(1)
-            assertThat(responseBody.details.get(0).reason).isEqualTo("class.BcryptIterationConstraint")
-            assertThat(responseBody.details.get(0).message).isEqualTo("class.BcryptIterationConstraint")
+            assertThat(responseBody.details.get(0).reason).isEqualTo("alerts.backend.constraints.class.BcryptIterationConstraint")
+            assertThat(responseBody.details.get(0).message).isEqualTo("alerts.backend.constraints.class.BcryptIterationConstraint")
             assertThat(responseBody.details.get(0).attributeName).isEqualTo("iterations")
             assertThat(responseBody.details.get(0).attributeValues).hasSize(1)
             assertThat(responseBody.details.get(0).attributeValues.get(0)).isEqualTo("0")
@@ -117,8 +117,8 @@ class BCryptControllerTest: TestBase() {
         assertThat(responseBody).isNotNull
         responseBody?.let {
             assertThat(responseBody.details).hasSize(1)
-            assertThat(responseBody.details.get(0).reason).isEqualTo("class.BCryptDataConstraint")
-            assertThat(responseBody.details.get(0).message).isEqualTo("class.BCryptDataConstraint")
+            assertThat(responseBody.details.get(0).reason).isEqualTo("alerts.backend.constraints.class.BCryptDataConstraint")
+            assertThat(responseBody.details.get(0).message).isEqualTo("alerts.backend.constraints.class.BCryptDataConstraint")
             assertThat(responseBody.details.get(0).attributeName).isEqualTo("data")
             assertThat(responseBody.details.get(0).attributeValues).hasSize(1)
             assertThat(responseBody.details.get(0).attributeValues.get(0)).isEqualTo("")
