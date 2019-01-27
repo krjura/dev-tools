@@ -17,15 +17,15 @@ export const translateEn = {
       form: {
         config: {
           title: "Characters",
-          useCapitalLetters: "Use capital letters",
-          useSmallLetters: "Use small letters",
-          useNumbers: "Use numbers",
+          useCapitalLetters: "Use capital letters (A, B, C, ...)",
+          useSmallLetters: "Use small letters (a, b, c, ...)",
+          useNumbers: "Use numbers (0, 1, 2, 3, ...)",
           length: 'Length of password',
           submit: 'Generate'
         }
       },
       results: {
-        panelHeading: "GeneratedPasswords",
+        panelHeading: "Generated Passwords",
         copied: "Copied",
         copyToClipboard: "Copy to clipboard",
         noData: "No passwords are generated at this point"

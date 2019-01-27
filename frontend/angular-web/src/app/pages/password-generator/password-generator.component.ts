@@ -77,5 +77,18 @@ export class PasswordGeneratorComponent  implements OnInit {
     const password: GeneratedPasswordModel = this.generatedPasswords[index];
 
     password.isContentCopied = this.clipboardService.copyFromContent(password.password);
+    this.clearContentCopied(index)
+  }
+
+  clearContentCopied(index: number) {
+    const that = this;
+
+    setTimeout(function () {
+      that.generatedPasswords[index].isContentCopied = false;
+    }, 2000);
+  }
+
+  clearPasswords() {
+    this.generatedPasswords = [];
   }
 }
