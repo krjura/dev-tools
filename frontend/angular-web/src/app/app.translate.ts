@@ -11,6 +11,18 @@ export const translateEn = {
     }
   },
   pages: {
+    uuidGenerator: {
+      pageHeader: "UUID Generator",
+      panelHeading: "Generate",
+      form: {
+        generateType4: "Generate type 4 UUID"
+      },
+      results: {
+        panelHeading: "Generated UUIDs",
+        copied: "Copied",
+        copyToClipboard: "Copy to clipboard"
+      }
+    },
     passwordGenerator: {
       pageHeader: "Password Generator",
       panelHeading: "Password Configuration",

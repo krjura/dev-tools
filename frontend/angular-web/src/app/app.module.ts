@@ -15,6 +15,7 @@ import { Base64EncoderComponent } from './pages/base64-encoder/base64-encoder.co
 import { Base64DecoderComponent } from './pages/base64-decoder/base64-decoder.component';
 import { BCryptPasswordComponent } from './pages/bcrypt-password/bcrypt-password.component';
 import { PasswordGeneratorComponent } from "./pages/password-generator/password-generator.component";
+import { UuidGeneratorComponent } from './pages/uuid-generator/uuid-generator.component';
 
 import { GlobalAlertService } from './shared/services/global-alert.service';
 
@@ -24,7 +25,8 @@ import { GlobalAlertService } from './shared/services/global-alert.service';
     Base64EncoderComponent,
     Base64DecoderComponent,
     BCryptPasswordComponent,
-    PasswordGeneratorComponent
+    PasswordGeneratorComponent,
+    UuidGeneratorComponent
   ],
   imports: [
     BrowserModule,

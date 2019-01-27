@@ -1,0 +1,66 @@
+<h1 class="page-header"> {{ 'pages.uuidGenerator.pageHeader' | translate }} </h1>
+
+<div class="row">
+  <!-- Left Panel -->
+  <div class="col-md-offset-3 col-md-6">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        {{ 'pages.uuidGenerator.panelHeading' | translate }}
+      </div>
+
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <form role="form" novalidate="">
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <button
+                      type="submit"
+                      class="btn btn-default"
+                      (click)="execute()"> {{ 'pages.uuidGenerator.form.generateType4'  | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="generatedUuids.length !== 0">
+  <!-- Left Panel -->
+  <div class="col-md-offset-3 col-md-6">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        {{ 'pages.uuidGenerator.results.panelHeading' | translate }}
+      </div>
+
+      <div class="panel-body">
+        <div class="row mt-6" *ngFor="let generated of generatedUuids; let index = index">
+          <div class="col-md-8 mt-6">
+            {{ generated.uuid }}
+          </div>
+          <div class="col-md-4">
+            <button
+              class="btn btn-primary"
+              (click)="copyPasswordToClipboard(index)">
+              {{ generated.isContentCopied
+              ? ('pages.passwordGenerator.results.copied' | translate)
+              : ('pages.passwordGenerator.results.copyToClipboard' | translate)
+              }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
