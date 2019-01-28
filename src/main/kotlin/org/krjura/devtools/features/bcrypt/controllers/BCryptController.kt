@@ -2,10 +2,9 @@ package org.krjura.devtools.features.bcrypt.controllers
 
 import org.krjura.devtools.features.bcrypt.pojo.BCryptWebRequest
 import org.krjura.devtools.features.bcrypt.pojo.BCryptWebResponse
-import org.krjura.devtools.enums.CustomHeaders
 import org.krjura.devtools.features.bcrypt.services.BCryptService
+import org.krjura.devtools.utils.ServerTimingBuilder
 import org.krjura.devtools.utils.StopWatchUtils
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -28,12 +27,9 @@ class BCryptController(val service: BCryptService) {
         val (duration, encoded) = StopWatchUtils
             .execute { this.service.calculate(request.iterations, request.data) }
 
-        val headers = HttpHeaders();
-        headers.add(CustomHeaders.DURATION, duration.toString())
-
         return ResponseEntity(
             BCryptWebResponse(request.iterations, request.data, encoded),
-            headers,
+            ServerTimingBuilder().addApp(duration).build(),
             HttpStatus.OK
         )
     }

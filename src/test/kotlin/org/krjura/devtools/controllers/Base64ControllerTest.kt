@@ -23,7 +23,7 @@ class Base64ControllerTest : TestBase() {
             .body(Mono.just(request), ByteArray::class.java)
             .exchange()
             .expectStatus().isOk
-            .expectHeader().exists(CustomHeaders.DURATION)
+            .expectHeader().exists(CustomHeaders.SERVER_TIMING)
             .returnResult(ByteArray::class.java);
 
         assertThat(result.responseBodyContent).isEqualTo(byteArrayOf(116, 101, 115, 116, 100, 97, 116, 97))
@@ -42,7 +42,7 @@ class Base64ControllerTest : TestBase() {
             .body(Mono.just(request), ByteArray::class.java)
             .exchange()
             .expectStatus().isOk
-            .expectHeader().exists(CustomHeaders.DURATION)
+            .expectHeader().exists(CustomHeaders.SERVER_TIMING)
             .returnResult(ByteArray::class.java);
 
         assertThat(result.responseBodyContent).isEqualTo("dGVzdGRhdGE=".toByteArray(StandardCharsets.UTF_8))

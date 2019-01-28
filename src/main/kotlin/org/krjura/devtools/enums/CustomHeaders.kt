@@ -2,6 +2,6 @@ package org.krjura.devtools.enums
 
 class CustomHeaders {
     companion object {
-        const val DURATION = "X-REQUEST-DURATION"
+        const val SERVER_TIMING = "Server-Timing"
     }
 }

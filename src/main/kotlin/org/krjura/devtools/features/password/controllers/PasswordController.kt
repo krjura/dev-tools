@@ -1,12 +1,11 @@
 package org.krjura.devtools.features.password.controllers
 
-import org.krjura.devtools.enums.CustomHeaders
 import org.krjura.devtools.features.password.controllers.pojo.PasswordRequest
 import org.krjura.devtools.features.password.controllers.pojo.PasswordResponse
 import org.krjura.devtools.features.password.services.PasswordGeneratorService
 import org.krjura.devtools.features.password.services.pojo.PasswordGeneratorConfig
+import org.krjura.devtools.utils.ServerTimingBuilder
 import org.krjura.devtools.utils.StopWatchUtils
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -31,12 +30,9 @@ class PasswordController(val service: PasswordGeneratorService) {
 
         val (duration, password) = StopWatchUtils.execute { service.generatePassword(serviceRequest) };
 
-        val headers = HttpHeaders();
-        headers.add(CustomHeaders.DURATION, duration.toString())
-
         return ResponseEntity(
             PasswordResponse(password),
-            headers,
+            ServerTimingBuilder().addApp(duration).build(),
             HttpStatus.OK);
     }
 }

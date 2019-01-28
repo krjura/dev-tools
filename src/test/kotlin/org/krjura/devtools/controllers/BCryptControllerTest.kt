@@ -26,7 +26,7 @@ class BCryptControllerTest: TestBase() {
             .body(Mono.just(request), BCryptWebRequest::class.java)
             .exchange()
             .expectStatus().isOk
-            .expectHeader().exists(CustomHeaders.DURATION)
+            .expectHeader().exists(CustomHeaders.SERVER_TIMING)
             .returnResult(BCryptWebResponse::class.java)
 
 
