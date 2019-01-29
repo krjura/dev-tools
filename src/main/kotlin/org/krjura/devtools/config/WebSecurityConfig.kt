@@ -29,6 +29,7 @@ class WebSecurityConfig {
             .csrf()
             .csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse());
             */
+        http.csrf().disable();
 
         return http.build();
     }
