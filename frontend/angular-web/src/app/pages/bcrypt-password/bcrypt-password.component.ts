@@ -5,6 +5,9 @@ import { Validators } from '@angular/forms';
 
 import { ClipboardService } from 'ngx-clipboard';
 import { GlobalAlertService } from '../../shared/services/global-alert.service';
+import { StorageService } from '../../shared/services/storage.service';
+
+const ITERATIONS_LOCAL_STORAGE_KEY = 'BCryptPasswordComponent.iterations';
 
 @Component({
   selector: 'app-bcrypt-password',
@@ -23,13 +26,17 @@ export class BCryptPasswordComponent implements OnInit {
     private http: HttpClient,
     private fb: FormBuilder,
     private clipboardService: ClipboardService,
-    private alertService: GlobalAlertService) {
+    private alertService: GlobalAlertService,
+    private storageService: StorageService) {
 
   }
 
   ngOnInit() {
+
+    const defaultIterations = parseInt(this.storageService.load(ITERATIONS_LOCAL_STORAGE_KEY, '4'), 10);
+
     this.form = this.fb.group({
-      iterations: [4],
+      iterations: [defaultIterations],
       data: [
         '',
         [Validators.required, Validators.maxLength(100), Validators.minLength(1)]
@@ -41,6 +48,8 @@ export class BCryptPasswordComponent implements OnInit {
     if (this.form.controls.data.value === null || this.form.controls.data.value.length === 0) {
       return;
     }
+
+    this.storageService.save(ITERATIONS_LOCAL_STORAGE_KEY, this.form.controls.iterations.value);
 
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json;charset=UTF-8')

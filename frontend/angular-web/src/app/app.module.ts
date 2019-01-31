@@ -14,10 +14,11 @@ import { AppComponent } from './app.component';
 import { Base64EncoderComponent } from './pages/base64-encoder/base64-encoder.component';
 import { Base64DecoderComponent } from './pages/base64-decoder/base64-decoder.component';
 import { BCryptPasswordComponent } from './pages/bcrypt-password/bcrypt-password.component';
-import { PasswordGeneratorComponent } from "./pages/password-generator/password-generator.component";
+import { PasswordGeneratorComponent } from './pages/password-generator/password-generator.component';
 import { UuidGeneratorComponent } from './pages/uuid-generator/uuid-generator.component';
 
 import { GlobalAlertService } from './shared/services/global-alert.service';
+import { StorageService } from './shared/services/storage.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { GlobalAlertService } from './shared/services/global-alert.service';
     TranslateModule.forRoot()
   ],
   providers: [
-    GlobalAlertService
+    GlobalAlertService,
+    StorageService
   ],
   bootstrap: [AppComponent]
 })

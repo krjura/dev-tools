@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { ClipboardService } from "ngx-clipboard";
+import { ClipboardService } from 'ngx-clipboard';
 
-import { UuidWebResponseModel } from "./model/uuid-web-response.model";
-import { GeneratedUuidModel } from "./model/generated-uuid.model";
-import { GlobalAlertService } from "../../shared/services/global-alert.service";
+import { UuidWebResponseModel } from './model/uuid-web-response.model';
+import { GeneratedUuidModel } from './model/generated-uuid.model';
+import { GlobalAlertService } from '../../shared/services/global-alert.service';
 
 @Component({
   selector: 'app-uuid-generator',
@@ -24,6 +24,7 @@ export class UuidGeneratorComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   execute() {

@@ -12,35 +12,35 @@ export const translateEn = {
   },
   pages: {
     uuidGenerator: {
-      pageHeader: "UUID Generator",
-      panelHeading: "Generate",
+      pageHeader: 'UUID Generator',
+      panelHeading: 'Generate',
       form: {
-        generateType4: "Generate type 4 UUID"
+        generateType4: 'Generate type 4 UUID'
       },
       results: {
-        panelHeading: "Generated UUIDs",
-        copied: "Copied",
-        copyToClipboard: "Copy to clipboard"
+        panelHeading: 'Generated UUIDs',
+        copied: 'Copied',
+        copyToClipboard: 'Copy to clipboard'
       }
     },
     passwordGenerator: {
-      pageHeader: "Password Generator",
-      panelHeading: "Password Configuration",
+      pageHeader: 'Password Generator',
+      panelHeading: 'Password Configuration',
       form: {
         config: {
-          title: "Characters",
-          useCapitalLetters: "Use capital letters (A, B, C, ...)",
-          useSmallLetters: "Use small letters (a, b, c, ...)",
-          useNumbers: "Use numbers (0, 1, 2, 3, ...)",
+          title: 'Characters',
+          useCapitalLetters: 'Use capital letters (A, B, C, ...)',
+          useSmallLetters: 'Use small letters (a, b, c, ...)',
+          useNumbers: 'Use numbers (0, 1, 2, 3, ...)',
           length: 'Length of password',
           submit: 'Generate'
         }
       },
       results: {
-        panelHeading: "Generated Passwords",
-        copied: "Copied",
-        copyToClipboard: "Copy to clipboard",
-        noData: "No passwords are generated at this point"
+        panelHeading: 'Generated Passwords',
+        copied: 'Copied',
+        copyToClipboard: 'Copy to clipboard',
+        noData: 'No passwords are generated at this point'
       }
     },
     base64Decoder: {

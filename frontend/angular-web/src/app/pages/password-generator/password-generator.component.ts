@@ -1,14 +1,17 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { ClipboardService } from "ngx-clipboard";
+import { ClipboardService } from 'ngx-clipboard';
 
-import { GlobalAlertService } from "../../shared/services/global-alert.service";
-import { PasswordRequestModel}  from "./model/password-request.model";
-import { PasswordResponseModel } from "./model/password-response.model";
-import { GeneratedPasswordModel } from "./model/generated-password.model";
+import { GlobalAlertService } from '../../shared/services/global-alert.service';
+import { PasswordRequestModel} from './model/password-request.model';
+import { PasswordResponseModel } from './model/password-response.model';
+import { GeneratedPasswordModel } from './model/generated-password.model';
+import { StorageService } from '../../shared/services/storage.service';
+
+const CHARACTER_COUNT_LOCAL_STORAGE_KEY = 'PasswordGeneratorComponent.characterCount';
 
 @Component({
   selector: 'app-password-generator',
@@ -26,7 +29,8 @@ export class PasswordGeneratorComponent  implements OnInit {
     private http: HttpClient,
     private fb: FormBuilder,
     private clipboardService: ClipboardService,
-    private alertService: GlobalAlertService) {
+    private alertService: GlobalAlertService,
+    private storageService: StorageService) {
   }
 
   private generatePasswordLengthOptions() {
@@ -39,15 +43,20 @@ export class PasswordGeneratorComponent  implements OnInit {
   ngOnInit(): void {
     this.generatePasswordLengthOptions();
 
+    const defaultCharacterCount = parseInt(this.storageService.load(CHARACTER_COUNT_LOCAL_STORAGE_KEY, '15'), 10);
+
     this.form = this.fb.group({
       useCapitalLetters: [true],
       useSmallLetters: [true],
       useNumbers: [true],
-      characterCount: [15, [Validators.required]]
+      characterCount: [defaultCharacterCount, [Validators.required]]
     });
   }
 
   execute() {
+
+    this.storageService.save(CHARACTER_COUNT_LOCAL_STORAGE_KEY, this.form.controls.characterCount.value);
+
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json;charset=UTF-8')
       .append('Accept', 'application/json;charset=UTF-8');
@@ -66,7 +75,7 @@ export class PasswordGeneratorComponent  implements OnInit {
         request,
         {headers: headers, responseType: 'json', withCredentials: true})
       .subscribe(response => {
-        this.generatedPasswords.push({isContentCopied: false, password: response.password})
+        this.generatedPasswords.push({isContentCopied: false, password: response.password});
       }, httpErrorResponse => {
 
         this.alertService.errorResponseAlert(httpErrorResponse.error);
@@ -77,7 +86,7 @@ export class PasswordGeneratorComponent  implements OnInit {
     const password: GeneratedPasswordModel = this.generatedPasswords[index];
 
     password.isContentCopied = this.clipboardService.copyFromContent(password.password);
-    this.clearContentCopied(index)
+    this.clearContentCopied(index);
   }
 
   clearContentCopied(index: number) {
