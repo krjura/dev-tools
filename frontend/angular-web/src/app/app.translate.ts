@@ -15,9 +15,29 @@ export const translateEn = {
     base64Decoder: 'Base64 Decoder',
     bcryptPassword: 'BCrypt Password Encoder',
     passwordGenerator: 'Password Generator',
-    uuidGenerator: 'UUID Generator'
+    uuidGenerator: 'UUID Generator',
+    pkiKeyGenerator: 'PKI Key Generator'
   },
   pages: {
+    pkiKeyGenerator: {
+      pageHeader: 'PKI Key Generator',
+      panelHeading: 'PKI Key Configuration',
+      form: {
+        keySize: 'Length of the key',
+        algorithm: 'Algorithm',
+        submit: 'Generate'
+      },
+      results: {
+        heading: 'Generated Public/Private Key',
+        publicKeyHeading: 'Public Key',
+        privateKeyHeading: 'Private Key',
+        downloadData: 'Download'
+      },
+      clipboard: {
+        copied: 'Copied',
+        copy: 'Copy to Clipboard'
+      }
+    },
     uuidGenerator: {
       pageHeader: 'UUID Generator',
       panelHeading: 'Generate',

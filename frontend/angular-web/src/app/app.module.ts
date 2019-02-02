@@ -20,6 +20,7 @@ import { UuidGeneratorComponent } from './pages/uuid-generator/uuid-generator.co
 import { GlobalAlertService } from './shared/services/global-alert.service';
 import { StorageService } from './shared/services/storage.service';
 import { GlobalNavigationComponent } from './shared/components/global-navigation/global-navigation.component';
+import { PkiKeyGeneratorComponent } from './pages/pki-key-generator/pki-key-generator.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { GlobalNavigationComponent } from './shared/components/global-navigation
     BCryptPasswordComponent,
     PasswordGeneratorComponent,
     UuidGeneratorComponent,
-    GlobalNavigationComponent
+    GlobalNavigationComponent,
+    PkiKeyGeneratorComponent
   ],
   imports: [
     BrowserModule,
