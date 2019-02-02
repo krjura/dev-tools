@@ -19,6 +19,7 @@ import { UuidGeneratorComponent } from './pages/uuid-generator/uuid-generator.co
 
 import { GlobalAlertService } from './shared/services/global-alert.service';
 import { StorageService } from './shared/services/storage.service';
+import { GlobalNavigationComponent } from './shared/components/global-navigation/global-navigation.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { StorageService } from './shared/services/storage.service';
     Base64DecoderComponent,
     BCryptPasswordComponent,
     PasswordGeneratorComponent,
-    UuidGeneratorComponent
+    UuidGeneratorComponent,
+    GlobalNavigationComponent
   ],
   imports: [
     BrowserModule,

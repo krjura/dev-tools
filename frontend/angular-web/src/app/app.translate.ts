@@ -10,6 +10,13 @@ export const translateEn = {
       }
     }
   },
+  menu: {
+    base64Encoder: 'Base64 Encoder',
+    base64Decoder: 'Base64 Decoder',
+    bcryptPassword: 'BCrypt Password Encoder',
+    passwordGenerator: 'Password Generator',
+    uuidGenerator: 'UUID Generator'
+  },
   pages: {
     uuidGenerator: {
       pageHeader: 'UUID Generator',
