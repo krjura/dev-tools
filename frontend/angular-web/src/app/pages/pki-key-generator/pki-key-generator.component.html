@@ -1,7 +1,7 @@
 <h1 class="page-header"> {{ 'pages.pkiKeyGenerator.pageHeader' | translate }} </h1>
 
 <div class="row">
-  <div class="col-md-offset-4 col-md-4">
+  <div class="col-md-12">
 
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -10,7 +10,7 @@
 
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-offset-4 col-md-4">
             <form role="form" novalidate="" [formGroup]="form">
 
               <div class="row">
@@ -77,7 +77,7 @@
 <div class="row" *ngFor="let generated of generatedPairs; let index = index">
   <div class="col-md-12">
 
-    <div class="panel panel-success">
+    <div class="panel panel-info">
       <div class="panel-heading">
         <button class="close" type="button" (click)="removeResult(index)">x</button>
         {{ 'pages.pkiKeyGenerator.results.heading' | translate }}
