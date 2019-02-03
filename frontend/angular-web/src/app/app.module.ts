@@ -21,6 +21,7 @@ import { GlobalAlertService } from './shared/services/global-alert.service';
 import { StorageService } from './shared/services/storage.service';
 import { GlobalNavigationComponent } from './shared/components/global-navigation/global-navigation.component';
 import { PkiKeyGeneratorComponent } from './pages/pki-key-generator/pki-key-generator.component';
+import { CopyToClipboardComponent } from './shared/components/copy-to-clipboard/copy-to-clipboard.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PkiKeyGeneratorComponent } from './pages/pki-key-generator/pki-key-gene
     PasswordGeneratorComponent,
     UuidGeneratorComponent,
     GlobalNavigationComponent,
-    PkiKeyGeneratorComponent
+    PkiKeyGeneratorComponent,
+    CopyToClipboardComponent
   ],
   imports: [
     BrowserModule,

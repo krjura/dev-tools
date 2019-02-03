@@ -62,16 +62,12 @@
                 <button
                   class="btn btn-primary"
                   type="button" (click)="downloadData(index)"> {{ 'pages.base64Encoder.result.downloadData' | translate }} </button>
-                <button
-                  class="btn btn-primary ml-4"
-                  [disabled]="isDataCopied"
-                  (click)="copyDataToClipboard(index)">
-                    {{
-                      isDataCopied
-                        ? ('pages.base64Encoder.clipboard.copied' | translate)
-                        : ('pages.base64Encoder.clipboard.copy' | translate)
-                    }}
-                </button>
+
+                <app-copy-to-clipboard
+                  class="ml-4"
+                  [data]="result.data">
+
+                </app-copy-to-clipboard>
               </div>
             </div>
           </div>
@@ -89,16 +85,12 @@
                   class="btn btn-primary"
                   type="button"
                   (click)="downloadValue(index)"> {{ 'pages.base64Encoder.result.downloadResult' | translate }} </button>
-                <button
-                  class="btn btn-primary ml-4"
-                  [disabled]="isResultCopied"
-                  (click)="copyResultToClipboard(index)">
-                    {{
-                      isResultCopied
-                      ? ('pages.base64Encoder.clipboard.copied' | translate)
-                      : ('pages.base64Encoder.clipboard.copy' | translate)
-                    }}
-                </button>
+
+                <app-copy-to-clipboard
+                  class="ml-4"
+                  [data]="result.value">
+
+                </app-copy-to-clipboard>
               </div>
             </div>
           </div>

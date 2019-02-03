@@ -41,6 +41,7 @@
 
     <div class="panel panel-info">
       <div class="panel-heading">
+        <button class="close" type="button" (click)="removeResults()">x</button>
         {{ 'pages.uuidGenerator.results.panelHeading' | translate }}
       </div>
 
@@ -50,14 +51,10 @@
             {{ generated.uuid }}
           </div>
           <div class="col-md-4">
-            <button
-              class="btn btn-primary"
-              (click)="copyPasswordToClipboard(index)">
-              {{ generated.isContentCopied
-              ? ('pages.passwordGenerator.results.copied' | translate)
-              : ('pages.passwordGenerator.results.copyToClipboard' | translate)
-              }}
-            </button>
+            <app-copy-to-clipboard
+              [data]="generated.uuid">
+
+            </app-copy-to-clipboard>
           </div>
         </div>
       </div>

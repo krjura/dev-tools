@@ -10,6 +10,12 @@ export const translateEn = {
       }
     }
   },
+  shared: {
+    copyToClipboard: {
+      copied: 'Copied',
+      copyToClipboard: 'Copy to Clipboard'
+    }
+  },
   menu: {
     base64Encoder: 'Base64 Encoder',
     base64Decoder: 'Base64 Decoder',
@@ -32,10 +38,6 @@ export const translateEn = {
         publicKeyHeading: 'Public Key',
         privateKeyHeading: 'Private Key',
         downloadData: 'Download'
-      },
-      clipboard: {
-        copied: 'Copied',
-        copy: 'Copy to Clipboard'
       }
     },
     uuidGenerator: {
@@ -65,8 +67,6 @@ export const translateEn = {
       },
       results: {
         panelHeading: 'Generated Passwords',
-        copied: 'Copied',
-        copyToClipboard: 'Copy to clipboard',
         noData: 'No passwords are generated at this point'
       }
     },
@@ -90,10 +90,6 @@ export const translateEn = {
         downloadData: 'Download data',
         value: 'Value',
         downloadResult: 'Download result'
-      },
-      clipboard: {
-        copy: 'Copy to clipboard',
-        copied: 'Copied'
       }
     },
     bcryptPassword: {
@@ -110,9 +106,7 @@ export const translateEn = {
         title: 'Result',
         password: 'Password:',
         iterations: 'Iterations:',
-        encodedData: 'Encoded data',
-        copied: 'Copied',
-        copyToClipboard: 'Copy to clipboard'
+        encodedData: 'Encoded data'
       }
     }
   }

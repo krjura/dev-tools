@@ -8,7 +8,6 @@ import { StorageService } from '../../shared/services/storage.service';
 
 import { GeneratePairResponseModel } from './model/generate-pair-response.model';
 import { GeneratePairRequestModel } from './model/generate-pair-request.model';
-import { GeneratePairViewModel } from './model/generate-pair-view.model';
 
 const PREFERRED_ALGORITHM_KEY = 'PkiKeyGeneratorComponent.algorithm';
 const PREFERRED_KEY_SIZE_KEY = 'PkiKeyGeneratorComponent.keySize';
@@ -24,7 +23,7 @@ export class PkiKeyGeneratorComponent implements OnInit {
   keySizes = ['512', '1024', '2048', '4096'];
   algorithms = ['RSA'];
 
-  generatedPairs: GeneratePairViewModel[] = [];
+  generatedPairs: GeneratePairResponseModel[] = [];
 
   constructor(
     private http: HttpClient,
@@ -64,7 +63,7 @@ export class PkiKeyGeneratorComponent implements OnInit {
         request,
         {headers: headers, responseType: 'json', withCredentials: true})
       .subscribe(response => {
-        this.generatedPairs.push({response: response, isPrivateKeyCopied: false, isPublicKeyCopied: false});
+        this.generatedPairs.push(response);
       }, httpErrorResponse => {
 
         this.alertService.errorResponseAlert(httpErrorResponse.error);
@@ -75,42 +74,16 @@ export class PkiKeyGeneratorComponent implements OnInit {
     this.generatedPairs.splice(index, 1);
   }
 
-  copyPublicKeyToClipboard(index: number) {
-    const selection = this.generatedPairs[index];
-
-    selection.isPublicKeyCopied = this.clipboardService.copyFromContent(selection.response.public);
-    this.clearPublicKeyCopiedFlag(selection);
-  }
-
-  clearPublicKeyCopiedFlag(selection: GeneratePairViewModel) {
-    setTimeout(function () {
-      selection.isPublicKeyCopied = false;
-    }, 2000);
-  }
-
-  copyPrivateKeyToClipboard(index: number) {
-    const selection = this.generatedPairs[index];
-
-    selection.isPrivateKeyCopied = this.clipboardService.copyFromContent(selection.response.private);
-    this.clearPrivateKeyCopiedFlag(selection);
-  }
-
-  clearPrivateKeyCopiedFlag(selection: GeneratePairViewModel) {
-    setTimeout(function () {
-      selection.isPublicKeyCopied = false;
-    }, 2000);
-  }
-
   downloadPublicKey(index: number) {
     const selection = this.generatedPairs[index];
 
-    this.download(selection.response.public, 'public-key.pem');
+    this.download(selection.public, 'public-key.pem');
   }
 
   downloadPrivateKey(index: number) {
     const selection = this.generatedPairs[index];
 
-    this.download(selection.response.private, 'private-key.pem');
+    this.download(selection.private, 'private-key.pem');
   }
 
   download(data: string, filename: string) {

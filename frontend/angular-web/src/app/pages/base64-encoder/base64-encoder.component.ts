@@ -3,8 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-import { ClipboardService } from 'ngx-clipboard';
-
 import { Base64EncodeResultModel } from './base64-encode-result.model';
 import { GlobalAlertService } from '../../shared/services/global-alert.service';
 
@@ -24,7 +22,6 @@ export class Base64EncoderComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private clipboardService: ClipboardService,
     private alertService: GlobalAlertService) {
 
   }
@@ -76,31 +73,5 @@ export class Base64EncoderComponent implements OnInit {
 
     window.open(url, '_blank');
     window.URL.revokeObjectURL(url);
-  }
-
-  copyResultToClipboard(index) {
-    this.isResultCopied = this.clipboardService.copyFromContent(this.results[index].value);
-    this.clearResultToClipboard();
-  }
-
-  clearResultToClipboard() {
-    const that = this;
-
-    setTimeout(function () {
-      that.isResultCopied = false;
-    }, 2000);
-  }
-
-  copyDataToClipboard(index: number) {
-    this.isDataCopied = this.clipboardService.copyFromContent(this.results[index].data);
-    this.clearDataToClipboard();
-  }
-
-  clearDataToClipboard() {
-    const that = this;
-
-    setTimeout(function () {
-      that.isDataCopied = false;
-    }, 2000);
   }
 }

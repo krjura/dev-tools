@@ -1,0 +1,9 @@
+<button
+  class="btn btn-primary"
+  [disabled]="isContentCopied"
+  (click)="copyToClipboard()">
+  {{ isContentCopied
+  ? ('shared.copyToClipboard.copied' | translate)
+  : ('shared.copyToClipboard.copyToClipboard' | translate)
+  }}
+</button>

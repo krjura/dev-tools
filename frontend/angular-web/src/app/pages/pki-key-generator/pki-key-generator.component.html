@@ -89,7 +89,7 @@
             <label> {{ 'pages.pkiKeyGenerator.results.publicKeyHeading' | translate }} </label>
             <textarea
               class="expand-textarea key-text"
-              [value]="generated.response.public"
+              [value]="generated.public"
               rows="16">
 
             </textarea>
@@ -99,16 +99,12 @@
                 <button
                   class="btn btn-primary"
                   type="button" (click)="downloadPublicKey(index)"> {{ 'pages.pkiKeyGenerator.results.downloadData' | translate }} </button>
-                <button
-                  class="btn btn-primary ml-4"
-                  [disabled]="generated.isPublicKeyCopied"
-                  (click)="copyPublicKeyToClipboard(index)">
-                  {{
-                  generated.isPublicKeyCopied
-                    ? ('pages.pkiKeyGenerator.clipboard.copied' | translate)
-                    : ('pages.pkiKeyGenerator.clipboard.copy' | translate)
-                  }}
-                </button>
+
+                <app-copy-to-clipboard
+                  class="ml-4"
+                  [data]="generated.public">
+
+                </app-copy-to-clipboard>
               </div>
             </div>
           </div>
@@ -116,7 +112,7 @@
             <label> {{ 'pages.pkiKeyGenerator.results.privateKeyHeading' | translate }} </label>
             <textarea
               class="expand-textarea key-text"
-              [value]="generated.response.private"
+              [value]="generated.private"
               rows="16">
             </textarea>
 
@@ -125,16 +121,13 @@
                 <button
                   class="btn btn-primary"
                   type="button" (click)="downloadPrivateKey(index)"> {{ 'pages.pkiKeyGenerator.results.downloadData' | translate }} </button>
-                <button
-                  class="btn btn-primary ml-4"
-                  [disabled]="generated.isPrivateKeyCopied"
-                  (click)="copyPrivateKeyToClipboard(index)">
-                  {{
-                  generated.isPrivateKeyCopied
-                    ? ('pages.pkiKeyGenerator.clipboard.copied' | translate)
-                    : ('pages.pkiKeyGenerator.clipboard.copy' | translate)
-                  }}
-                </button>
+
+                <app-copy-to-clipboard
+                  class="ml-4"
+                  [data]="generated.private">
+
+                </app-copy-to-clipboard>
+
               </div>
             </div>
           </div>

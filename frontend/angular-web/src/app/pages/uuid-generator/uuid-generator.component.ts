@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { ClipboardService } from 'ngx-clipboard';
-
 import { UuidWebResponseModel } from './model/uuid-web-response.model';
-import { GeneratedUuidModel } from './model/generated-uuid.model';
 import { GlobalAlertService } from '../../shared/services/global-alert.service';
 
 @Component({
@@ -14,11 +11,10 @@ import { GlobalAlertService } from '../../shared/services/global-alert.service';
 })
 export class UuidGeneratorComponent implements OnInit {
 
-  generatedUuids: GeneratedUuidModel[] = [];
+  generatedUuids: UuidWebResponseModel[] = [];
 
   constructor(
     private http: HttpClient,
-    private clipboardService: ClipboardService,
     private alertService: GlobalAlertService) {
 
   }
@@ -37,25 +33,14 @@ export class UuidGeneratorComponent implements OnInit {
         '/api/v1/password/generate',
         {headers: headers, responseType: 'json', withCredentials: true})
       .subscribe(response => {
-        this.generatedUuids.push({ uuid: response.uuid, isContentCopied: false });
+        this.generatedUuids.push(response);
       }, httpErrorResponse => {
 
         this.alertService.errorResponseAlert(httpErrorResponse.error);
       });
   }
 
-  copyPasswordToClipboard(index: number) {
-    const result = this.generatedUuids[index];
-
-    result.isContentCopied = this.clipboardService.copyFromContent(result.uuid);
-    this.clearContentCopied(index);
-  }
-
-  clearContentCopied(index: number) {
-    const that = this;
-
-    setTimeout(function () {
-      that.generatedUuids[index].isContentCopied = false;
-    }, 2000);
+  removeResults() {
+    this.generatedUuids = [];
   }
 }

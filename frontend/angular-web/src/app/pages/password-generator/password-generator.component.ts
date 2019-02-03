@@ -1,14 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { ClipboardService } from 'ngx-clipboard';
-
 import { GlobalAlertService } from '../../shared/services/global-alert.service';
 import { PasswordRequestModel} from './model/password-request.model';
 import { PasswordResponseModel } from './model/password-response.model';
-import { GeneratedPasswordModel } from './model/generated-password.model';
 import { StorageService } from '../../shared/services/storage.service';
 
 const CHARACTER_COUNT_LOCAL_STORAGE_KEY = 'PasswordGeneratorComponent.characterCount';
@@ -23,12 +20,11 @@ export class PasswordGeneratorComponent  implements OnInit {
   form: FormGroup;
   optionValues: string[];
 
-  generatedPasswords: GeneratedPasswordModel[] = [];
+  generatedPasswords: PasswordResponseModel[] = [];
 
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private clipboardService: ClipboardService,
     private alertService: GlobalAlertService,
     private storageService: StorageService) {
   }
@@ -75,26 +71,11 @@ export class PasswordGeneratorComponent  implements OnInit {
         request,
         {headers: headers, responseType: 'json', withCredentials: true})
       .subscribe(response => {
-        this.generatedPasswords.push({isContentCopied: false, password: response.password});
+        this.generatedPasswords.push(response);
       }, httpErrorResponse => {
 
         this.alertService.errorResponseAlert(httpErrorResponse.error);
       });
-  }
-
-  copyPasswordToClipboard(index: number) {
-    const password: GeneratedPasswordModel = this.generatedPasswords[index];
-
-    password.isContentCopied = this.clipboardService.copyFromContent(password.password);
-    this.clearContentCopied(index);
-  }
-
-  clearContentCopied(index: number) {
-    const that = this;
-
-    setTimeout(function () {
-      that.generatedPasswords[index].isContentCopied = false;
-    }, 2000);
   }
 
   clearPasswords() {

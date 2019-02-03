@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-import { ClipboardService } from 'ngx-clipboard';
 import { GlobalAlertService } from '../../shared/services/global-alert.service';
 import { StorageService } from '../../shared/services/storage.service';
 
@@ -25,7 +24,6 @@ export class BCryptPasswordComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private clipboardService: ClipboardService,
     private alertService: GlobalAlertService,
     private storageService: StorageService) {
 
@@ -72,23 +70,6 @@ export class BCryptPasswordComponent implements OnInit {
 
           this.alertService.errorResponseAlert(httpErrorResponse.error);
       });
-  }
-
-  copyData() {
-    if (this.form.controls.data.value === null || this.form.controls.data.value.length === 0) {
-      return;
-    }
-
-    this.isContentCopied = this.clipboardService.copyFromContent(this.result.encoded);
-    this.clearContentCopied();
-  }
-
-  clearContentCopied() {
-    const that = this;
-
-    setTimeout(function () {
-      that.isContentCopied = false;
-    }, 2000);
   }
 
   clearResult() {
