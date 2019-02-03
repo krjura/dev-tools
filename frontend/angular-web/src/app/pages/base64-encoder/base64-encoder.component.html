@@ -13,7 +13,7 @@
           <div class="col-md-12">
             <form role="form" novalidate="" [formGroup]="form">
               <div class="form-group">
-                <label>Data</label>
+                <label for="encodeData">Data</label>
                 <textarea
                   id="encodeData"
                   name="encodeData"
@@ -50,8 +50,10 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-6">
-            <p class="base64-encode-result-header"> {{ 'pages.base64Encoder.result.data' | translate }} </p>
+            <label for="resultData" class="base64-encode-result-header"> {{ 'pages.base64Encoder.result.data' | translate }} </label>
             <textarea
+              id="resultData"
+              name="resultData"
               class="expand-textarea"
               [value]="result.data"
               rows="4">
@@ -59,21 +61,25 @@
             </textarea>
             <div class="row">
               <div class="col-md-12 mt-4">
-                <button
-                  class="btn btn-primary"
-                  type="button" (click)="downloadData(index)"> {{ 'pages.base64Encoder.result.downloadData' | translate }} </button>
+
+                <app-download-binary
+                  [mediaType]="'application/octet-stream'"
+                  [filename]="'base64-encode-data.txt'"
+                  [dataAsString]="result.data">
+                </app-download-binary>
 
                 <app-copy-to-clipboard
                   class="ml-4"
                   [data]="result.data">
-
                 </app-copy-to-clipboard>
               </div>
             </div>
           </div>
           <div class="col-md-6">
-            <p class="base64-encode-result-header"> {{ 'pages.base64Encoder.result.value' | translate }} </p>
+            <label for="resultValue" class="base64-encode-result-header"> {{ 'pages.base64Encoder.result.value' | translate }} </label>
             <textarea
+              id="resultValue"
+              name="resultValue"
               class="expand-textarea"
               [value]="result.value"
               rows="4">
@@ -81,15 +87,15 @@
             </textarea>
             <div class="row">
               <div class="col-md-12 mt-4">
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  (click)="downloadValue(index)"> {{ 'pages.base64Encoder.result.downloadResult' | translate }} </button>
+                <app-download-binary
+                  [mediaType]="'application/octet-stream'"
+                  [filename]="'base64-encode-value.txt'"
+                  [dataAsString]="result.value">
+                </app-download-binary>
 
                 <app-copy-to-clipboard
                   class="ml-4"
                   [data]="result.value">
-
                 </app-copy-to-clipboard>
               </div>
             </div>

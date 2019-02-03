@@ -73,24 +73,4 @@ export class PkiKeyGeneratorComponent implements OnInit {
   removeResult(index: number) {
     this.generatedPairs.splice(index, 1);
   }
-
-  downloadPublicKey(index: number) {
-    const selection = this.generatedPairs[index];
-
-    this.download(selection.public, 'public-key.pem');
-  }
-
-  downloadPrivateKey(index: number) {
-    const selection = this.generatedPairs[index];
-
-    this.download(selection.private, 'private-key.pem');
-  }
-
-  download(data: string, filename: string) {
-    const file = new File([data], filename, {type: 'application/x-pem-file'});
-    const url = window.URL.createObjectURL(file);
-
-    window.open(url, '_blank');
-    window.URL.revokeObjectURL(url);
-  }
 }

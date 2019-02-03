@@ -22,6 +22,7 @@ import { StorageService } from './shared/services/storage.service';
 import { GlobalNavigationComponent } from './shared/components/global-navigation/global-navigation.component';
 import { PkiKeyGeneratorComponent } from './pages/pki-key-generator/pki-key-generator.component';
 import { CopyToClipboardComponent } from './shared/components/copy-to-clipboard/copy-to-clipboard.component';
+import { DownloadBinaryComponent } from './shared/components/download-binary/download-binary.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CopyToClipboardComponent } from './shared/components/copy-to-clipboard/
     UuidGeneratorComponent,
     GlobalNavigationComponent,
     PkiKeyGeneratorComponent,
-    CopyToClipboardComponent
+    CopyToClipboardComponent,
+    DownloadBinaryComponent
   ],
   imports: [
     BrowserModule,

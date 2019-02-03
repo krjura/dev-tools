@@ -16,7 +16,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label> {{ 'pages.pkiKeyGenerator.form.keySize' | translate }} </label>
+                    <label for="keySize"> {{ 'pages.pkiKeyGenerator.form.keySize' | translate }} </label>
                     <select
                       class="form-control"
                       id="keySize"
@@ -37,7 +37,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                  <label> {{ 'pages.pkiKeyGenerator.form.algorithm' | translate }} </label>
+                  <label for="algorithm"> {{ 'pages.pkiKeyGenerator.form.algorithm' | translate }} </label>
                     <select
                       class="form-control"
                       id="algorithm"
@@ -86,8 +86,10 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-6">
-            <label> {{ 'pages.pkiKeyGenerator.results.publicKeyHeading' | translate }} </label>
+            <label for="publicKeyResult"> {{ 'pages.pkiKeyGenerator.results.publicKeyHeading' | translate }} </label>
             <textarea
+              id="publicKeyResult"
+              name="publicKeyResult"
               class="expand-textarea key-text"
               [value]="generated.public"
               rows="16">
@@ -96,21 +98,25 @@
 
             <div class="row mt-6">
               <div class="col-md-12">
-                <button
-                  class="btn btn-primary"
-                  type="button" (click)="downloadPublicKey(index)"> {{ 'pages.pkiKeyGenerator.results.downloadData' | translate }} </button>
+
+                <app-download-binary
+                  [mediaType]="'application/x-pem-file'"
+                  [filename]="'public-key.pem'"
+                  [dataAsString]="generated.public">
+                </app-download-binary>
 
                 <app-copy-to-clipboard
                   class="ml-4"
                   [data]="generated.public">
-
                 </app-copy-to-clipboard>
               </div>
             </div>
           </div>
           <div class="col-md-6">
-            <label> {{ 'pages.pkiKeyGenerator.results.privateKeyHeading' | translate }} </label>
+            <label for="privateKeyResult"> {{ 'pages.pkiKeyGenerator.results.privateKeyHeading' | translate }} </label>
             <textarea
+              id="privateKeyResult"
+              name="privateKeyResult"
               class="expand-textarea key-text"
               [value]="generated.private"
               rows="16">
@@ -118,14 +124,15 @@
 
             <div class="row mt-6">
               <div class="col-md-12">
-                <button
-                  class="btn btn-primary"
-                  type="button" (click)="downloadPrivateKey(index)"> {{ 'pages.pkiKeyGenerator.results.downloadData' | translate }} </button>
+                <app-download-binary
+                  [mediaType]="'application/x-pem-file'"
+                  [filename]="'private-key.pem'"
+                  [dataAsString]="generated.private">
+                </app-download-binary>
 
                 <app-copy-to-clipboard
                   class="ml-4"
                   [data]="generated.private">
-
                 </app-copy-to-clipboard>
 
               </div>

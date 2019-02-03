@@ -58,20 +58,4 @@ export class Base64EncoderComponent implements OnInit {
   removeResult(index: number) {
     this.results.splice(index, 1);
   }
-
-  downloadValue(index: number) {
-    this.download(this.results[index].value, 'base64-encode-value.txt');
-  }
-
-  downloadData(index: number) {
-    this.download(this.results[index].data, 'base64-encode-data.txt');
-  }
-
-  download(data: string, filename: string) {
-    const file = new File([data], filename, {type: 'application/octet-stream'});
-    const url = window.URL.createObjectURL(file);
-
-    window.open(url, '_blank');
-    window.URL.revokeObjectURL(url);
-  }
 }

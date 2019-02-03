@@ -14,6 +14,9 @@ export const translateEn = {
     copyToClipboard: {
       copied: 'Copied',
       copyToClipboard: 'Copy to Clipboard'
+    },
+    downloadBinary: {
+      downloadResult: "Download"
     }
   },
   menu: {
@@ -37,7 +40,6 @@ export const translateEn = {
         heading: 'Generated Public/Private Key',
         publicKeyHeading: 'Public Key',
         privateKeyHeading: 'Private Key',
-        downloadData: 'Download'
       }
     },
     uuidGenerator: {
@@ -87,9 +89,7 @@ export const translateEn = {
       result: {
         title: 'Encoding Result',
         data: 'Data',
-        downloadData: 'Download data',
         value: 'Value',
-        downloadResult: 'Download result'
       }
     },
     bcryptPassword: {
