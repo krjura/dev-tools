@@ -10,11 +10,9 @@ server:
     session:
       timeout: 3600
   port: 25000
+  compression:
+    enabled: true
   use-forward-headers: true
-  tomcat:
-    protocolHeader: x-forwarded-proto
-    portHeader: x-forwarded-port
-    remoteIpHeader: x-forwarded-for
 
 spring:
   main:
