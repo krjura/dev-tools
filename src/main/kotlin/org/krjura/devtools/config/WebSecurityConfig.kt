@@ -5,7 +5,8 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.web.server.SecurityWebFilterChain
-import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository
+import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler
+import java.net.URI
 
 @Configuration
 @EnableWebFluxSecurity
@@ -31,6 +32,22 @@ class WebSecurityConfig {
             */
         http.csrf().disable();
 
+        http
+            .oauth2Login()
+
+        http
+            .logout()
+            .logoutUrl("/logout")
+            .logoutSuccessHandler(logoutHandler());
+
         return http.build();
+    }
+
+    fun logoutHandler(): RedirectServerLogoutSuccessHandler {
+        val handler = RedirectServerLogoutSuccessHandler();
+
+        handler.setLogoutSuccessUrl(URI.create("/portal"))
+
+        return handler;
     }
 }
