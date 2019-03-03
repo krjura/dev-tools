@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { GlobalHubService } from '../../services/global-hub.service';
 import { PartialObserver, Subscription } from 'rxjs';
@@ -8,7 +8,8 @@ import { UserInfoEventModel } from '../../events/user-info-event.model';
 @Component({
   selector: 'app-global-navbar-links',
   templateUrl: './global-navbar-links.component.html',
-  styleUrls: ['./global-navbar-links.component.css']
+  styleUrls: ['./global-navbar-links.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalNavbarLinksComponent implements OnInit, OnDestroy {
 
@@ -20,18 +21,23 @@ export class GlobalNavbarLinksComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(DOCUMENT) private document: any,
+    private cdr: ChangeDetectorRef,
     private hub: GlobalHubService) {
 
   }
 
   ngOnInit() {
+    this.setupAuthObserver();
+  }
 
+  private setupAuthObserver() {
     const authObserver: PartialObserver<EventModel> = {
       next: value => {
         if (value.type === 'UserInfoEventModel') {
-          const userInfo: UserInfoEventModel = <UserInfoEventModel> value;
+          const userInfo: UserInfoEventModel = <UserInfoEventModel>value;
 
           this.authenticated = userInfo.authenticated;
+          this.cdr.markForCheck();
           console.log('user authentication status is: ' + this.authenticated);
         }
       },

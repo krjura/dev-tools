@@ -33,7 +33,7 @@ export class CopyToClipboardComponent {
     const that = this;
     setTimeout(function () {
       that.isContentCopied = false;
-      that.cdr.detectChanges();
+      that.cdr.markForCheck();
     }, 2000);
   }
 }
