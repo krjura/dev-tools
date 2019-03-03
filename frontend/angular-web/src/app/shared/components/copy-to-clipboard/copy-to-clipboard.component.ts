@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
-import { ClipboardService } from "ngx-clipboard";
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-copy-to-clipboard',
@@ -21,7 +21,7 @@ export class CopyToClipboardComponent {
   }
 
   copyToClipboard() {
-    if(this.data == null || this.data.length == 0) {
+    if (this.data === null || this.data.length === 0) {
       return;
     }
 

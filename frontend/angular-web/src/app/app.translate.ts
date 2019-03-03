@@ -16,7 +16,7 @@ export const translateEn = {
       copyToClipboard: 'Copy to Clipboard'
     },
     downloadBinary: {
-      downloadResult: "Download"
+      downloadResult: 'Download'
     }
   },
   menu: {

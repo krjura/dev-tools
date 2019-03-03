@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,9 @@ import { GlobalNavigationComponent } from './shared/components/global-navigation
 import { PkiKeyGeneratorComponent } from './pages/pki-key-generator/pki-key-generator.component';
 import { CopyToClipboardComponent } from './shared/components/copy-to-clipboard/copy-to-clipboard.component';
 import { DownloadBinaryComponent } from './shared/components/download-binary/download-binary.component';
+import { AuthenticationService } from './shared/services/authentication.service';
+import { GlobalHubService } from './shared/services/global-hub.service';
+import { GlobalNavbarLinksComponent } from './shared/components/global-navbar-links/global-navbar-links.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { DownloadBinaryComponent } from './shared/components/download-binary/dow
     GlobalNavigationComponent,
     PkiKeyGeneratorComponent,
     CopyToClipboardComponent,
-    DownloadBinaryComponent
+    DownloadBinaryComponent,
+    GlobalNavbarLinksComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,15 @@ import { DownloadBinaryComponent } from './shared/components/download-binary/dow
   ],
   providers: [
     GlobalAlertService,
-    StorageService
+    StorageService,
+    AuthenticationService,
+    GlobalHubService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authenticationService: AuthenticationService) => () => authenticationService.loadUserInfo(),
+      deps: [AuthenticationService],
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

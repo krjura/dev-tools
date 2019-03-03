@@ -1,0 +1,26 @@
+<ul class="nav navbar-top-links navbar-right">
+
+  <li
+    [ngClass]="{ 'dropdown': true, 'open': showDropdown}"
+  >
+
+    <a class="dropdown-toggle" (click)="onDropdownToggle()">
+      <i class="fa fa-user fa-fw"></i>
+      <i class="fa fa-caret-down"></i>
+    </a>
+
+    <ul class="dropdown-menu dropdown-user">
+      <li>
+        <a *ngIf="authenticated" (click)="onLogout()">
+          <i class="fa fa-sign-out fa-fw"></i>
+          Logout
+        </a>
+        <a *ngIf="! authenticated" (click)="onLogin()">
+          <i class="fa fa-sign-in fa-fw"></i>
+          Login
+        </a>
+      </li>
+    </ul>
+    <!-- /.dropdown-user -->
+  </li>
+</ul>
