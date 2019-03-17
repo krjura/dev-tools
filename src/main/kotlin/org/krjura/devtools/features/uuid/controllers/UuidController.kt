@@ -15,8 +15,6 @@ class UuidController {
         produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
     )
     fun generateType4Uuid(): ResponseEntity<UuidWebResponse> {
-        return ResponseEntity.ok(
-            UuidWebResponse(UUID.randomUUID().toString())
-        );
+        return ResponseEntity.ok(UuidWebResponse(UUID.randomUUID().toString()));
     }
 }

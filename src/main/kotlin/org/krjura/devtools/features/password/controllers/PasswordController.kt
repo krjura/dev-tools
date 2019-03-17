@@ -4,9 +4,6 @@ import org.krjura.devtools.features.password.controllers.pojo.PasswordRequest
 import org.krjura.devtools.features.password.controllers.pojo.PasswordResponse
 import org.krjura.devtools.features.password.services.PasswordGeneratorService
 import org.krjura.devtools.features.password.services.pojo.PasswordGeneratorConfig
-import org.krjura.devtools.utils.ServerTimingBuilder
-import org.krjura.devtools.utils.StopWatchUtils
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
@@ -22,17 +19,13 @@ class PasswordController(val service: PasswordGeneratorService) {
         consumes = [MediaType.APPLICATION_JSON_UTF8_VALUE],
         produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
     )
-    fun generatePassword(
-        @RequestBody @Valid request: PasswordRequest): ResponseEntity<PasswordResponse> {
+    fun generatePassword(@RequestBody @Valid request: PasswordRequest): ResponseEntity<PasswordResponse> {
 
         val serviceRequest = PasswordGeneratorConfig(
             request.useCapitalLetters, request.useSmallLetters, request.useNumbers, request.characterCount);
 
-        val (duration, password) = StopWatchUtils.execute { service.generatePassword(serviceRequest) };
+        val password = service.generatePassword(serviceRequest);
 
-        return ResponseEntity(
-            PasswordResponse(password),
-            ServerTimingBuilder().addApp(duration).build(),
-            HttpStatus.OK);
+        return ResponseEntity.ok(PasswordResponse(password))
     }
 }
