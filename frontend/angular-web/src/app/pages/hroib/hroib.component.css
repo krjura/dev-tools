@@ -1,0 +1,15 @@
+.oib-valid {
+  color: green;
+}
+
+.oib-not-valid {
+  color: red;
+}
+
+.oib-generate-height {
+  min-height: 120px;
+}
+
+.oib-validator-height {
+  min-height: 120px;
+}

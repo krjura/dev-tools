@@ -1,0 +1,117 @@
+<h1 class="page-header"> {{ 'pages.hroib.pageHeader' | translate }} </h1>
+
+
+<div class="row">
+
+  <div class="col-md-6">
+
+    <!-- OIB Generator start -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        {{ 'pages.hroib.generator.heading' | translate }}
+      </div>
+
+      <div class="panel-body oib-generate-height">
+
+        <div class="row">
+          <div class="col-md-12">
+
+            <form role="form" novalidate="">
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <button
+                      type="submit"
+                      class="btn btn-default"
+                      (click)="generateOib()"> {{ 'pages.hroib.generator.form.generatorOib'  | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- OIB Generator end -->
+
+    <!-- OIB Generator results start -->
+    <div class="panel panel-info" *ngIf="generatedOibs.length != 0">
+      <div class="panel-heading">
+        <button class="close" type="button" (click)="clearGeneratedOibs()">x</button>
+        {{ 'pages.hroib.generatorResults.heading' | translate }}
+      </div>
+
+      <div class="panel-body">
+
+        <!-- START FORM -->
+        <div class="row">
+          <div class="col-md-12">
+
+            <div class="row mt-6" *ngFor="let generated of generatedOibs; let index = index">
+              <div class="col-md-8 mt-6">
+                {{ generated.oib }}
+              </div>
+              <div class="col-md-4">
+                <app-copy-to-clipboard
+                  [data]="generated.oib">
+
+                </app-copy-to-clipboard>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- OIB Generator results start -->
+  </div>
+
+  <div class="col-md-6">
+
+      <!-- OIB Validator start -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        {{ 'pages.hroib.validator.heading' | translate }}
+      </div>
+
+      <div class="panel-body oib-validator-height">
+
+        <div class="row">
+          <div class="col-md-12">
+
+            <form role="form" novalidate="" [formGroup]="oibValidatorForm">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      id="oibToValidate"
+                      name="oibToValidate"
+                      autocomplete="off"
+                      formControlName="oib"
+                      (input)="onOibValidatorInputChange($event.target.value)">
+                  </div>
+                  <p [ngClass]="{'help-block': true, 'not-valid': !oibValidatorForm.controls.oib.valid}"> {{ 'pages.hroib.validator.form.oibHelpBlock' | translate }} </p>
+                </div>
+                <div class="col-md-6">
+                  <i class="fa fa-thumbs-up fa-2x oib-valid" *ngIf="oibIsValid == 1"></i>
+                  <i class="fa fa-thumbs-down fa-2x oib-not-valid" *ngIf="oibIsValid == 2"></i>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- OIB Validator start -->
+
+  </div>
+
+</div>

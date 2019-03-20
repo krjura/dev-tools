@@ -6,6 +6,7 @@ import { BCryptPasswordComponent } from './pages/bcrypt-password/bcrypt-password
 import { PasswordGeneratorComponent } from './pages/password-generator/password-generator.component';
 import { UuidGeneratorComponent } from './pages/uuid-generator/uuid-generator.component';
 import { PkiKeyGeneratorComponent } from './pages/pki-key-generator/pki-key-generator.component';
+import { HroibComponent } from './pages/hroib/hroib.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'op/pki-key-generator',
     component: PkiKeyGeneratorComponent
+  },
+  {
+    path: 'op/hr-oib',
+    component: HroibComponent
   }
 ];
 

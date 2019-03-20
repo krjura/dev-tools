@@ -26,6 +26,7 @@ import { DownloadBinaryComponent } from './shared/components/download-binary/dow
 import { AuthenticationService } from './shared/services/authentication.service';
 import { GlobalHubService } from './shared/services/global-hub.service';
 import { GlobalNavbarLinksComponent } from './shared/components/global-navbar-links/global-navbar-links.component';
+import { HroibComponent } from './pages/hroib/hroib.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { GlobalNavbarLinksComponent } from './shared/components/global-navbar-li
     PkiKeyGeneratorComponent,
     CopyToClipboardComponent,
     DownloadBinaryComponent,
-    GlobalNavbarLinksComponent
+    GlobalNavbarLinksComponent,
+    HroibComponent
   ],
   imports: [
     BrowserModule,

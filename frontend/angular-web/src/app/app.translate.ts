@@ -25,9 +25,28 @@ export const translateEn = {
     bcryptPassword: 'BCrypt Password Encoder',
     passwordGenerator: 'Password Generator',
     uuidGenerator: 'UUID Generator',
-    pkiKeyGenerator: 'PKI Key Generator'
+    pkiKeyGenerator: 'PKI Key Generator',
+    hrOib: 'HR OIB'
   },
   pages: {
+    hroib: {
+      pageHeader: 'HR OIB Tools',
+      generator: {
+        heading: 'OIB Generator',
+        form: {
+          generatorOib: 'Generate new OIB'
+        }
+      },
+      generatorResults: {
+        heading: 'Generated OIBs',
+      },
+      validator: {
+        heading: 'Validate OIB',
+        form: {
+          oibHelpBlock: 'Please enter OIB value'
+        }
+      }
+    },
     pkiKeyGenerator: {
       pageHeader: 'PKI Key Generator',
       panelHeading: 'PKI Key Configuration',
