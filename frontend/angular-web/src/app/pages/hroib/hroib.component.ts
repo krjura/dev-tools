@@ -58,8 +58,6 @@ export class HroibComponent implements OnInit {
   }
 
   onOibValidatorInputChange(value: string) {
-    console.log(value);
-
     if (! this.oibValidatorForm.controls.oib.valid) {
       this.oibIsValid = OibValidationState.nonValid;
       return;
