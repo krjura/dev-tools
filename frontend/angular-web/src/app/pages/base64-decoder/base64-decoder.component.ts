@@ -25,7 +25,22 @@ export class Base64DecoderComponent implements OnInit {
     this.form = this.fb.group({
       data: [
         '',
-        [Validators.required, Validators.minLength(1)]
+        [
+          Validators.required,
+          Validators.minLength(1)
+        ]
+      ],
+      outputFormat: [
+        'application/octet-stream',
+        [Validators.required]
+      ],
+      outputFilename: [
+        'base64-decode-value.bin',
+        [
+          Validators.required,
+          Validators.pattern('[a-zA-Z0-9\.-]+'),
+          Validators.minLength(5),
+          Validators.maxLength(30)]
       ]
     });
   }
@@ -43,7 +58,7 @@ export class Base64DecoderComponent implements OnInit {
         {headers: headers, responseType: 'arraybuffer', withCredentials: true})
       .subscribe(result => {
 
-        const file = new File([result], 'base64-decode-value.bin', {type: 'application/octet-stream'});
+        const file = new File([result], this.determineOutputFilename(), {type: this.determineOutputFormat()});
         this.download(file);
 
         this.form.controls.data.patchValue('');
@@ -51,6 +66,22 @@ export class Base64DecoderComponent implements OnInit {
 
         this.alertService.errorResponseAlert(httpErrorResponse.error);
       });
+  }
+
+  private determineOutputFilename() {
+    if (this.form.controls.outputFilename.valid) {
+      return this.form.controls.outputFilename.value;
+    } else {
+      return 'base64-decode.bin';
+    }
+  }
+
+  private determineOutputFormat() {
+    if (this.form.controls.outputFormat.valid) {
+      return this.form.controls.outputFormat.value;
+    } else {
+      return 'application/octet-stream';
+    }
   }
 
   download(data: any) {

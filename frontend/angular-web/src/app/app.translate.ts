@@ -96,6 +96,11 @@ export const translateEn = {
       pageHeading: 'Decoding data',
       form: {
         data: 'Data',
+        dataHelpBlock: 'Please enter data to decode',
+        outputFormatLabel: 'Output type',
+        outputFormatHelpBlock: 'Please enter output format',
+        outputFilenameLabel: 'Filename',
+        outputFilenameHelpBlock: 'Filename (characters, numbers, -, .)',
         submit: 'Decode'
       }
     },
