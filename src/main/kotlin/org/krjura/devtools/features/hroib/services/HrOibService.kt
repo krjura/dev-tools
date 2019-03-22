@@ -6,16 +6,18 @@ import org.krjura.devtools.features.hroib.HrOibServiceUtils.generateFirstTenDigi
 import org.krjura.devtools.features.hroib.HrOibServiceUtils.isNotNumber
 import org.krjura.devtools.features.hroib.HrOibServiceUtils.toDigits
 import org.springframework.stereotype.Service
-import java.lang.IllegalStateException
 
 @Service
 class HrOibService {
 
+    /**
+     * Generate a new valid OIB
+     */
     fun generateOib(): String {
         val oib = generateFirstTenDigits()
         val controlDigit = calculateControlDigit(oib);
 
-        return ensureOibIsValid(joinDigits(oib, controlDigit))
+        return joinDigits(oib, controlDigit)
     }
 
     /**
@@ -39,13 +41,5 @@ class HrOibService {
 
         val digits = toDigits(oib);
         return digits[10] == calculateControlDigit(digits);
-    }
-
-    private fun ensureOibIsValid(oib: String): String {
-        if(!validate(oib)) {
-            throw IllegalStateException("generated oib is not valid");
-        }
-
-        return oib;
     }
 }

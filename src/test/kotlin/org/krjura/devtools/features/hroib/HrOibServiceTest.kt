@@ -13,16 +13,23 @@ class HrOibServiceTest {
         val service = HrOibService();
         val expectedPattern = Pattern.compile("\\d{11}");
 
-        assertTrue(expectedPattern.matcher(service.generateOib()).matches())
-        assertTrue(expectedPattern.matcher(service.generateOib()).matches())
-        assertTrue(expectedPattern.matcher(service.generateOib()).matches())
-        assertTrue(expectedPattern.matcher(service.generateOib()).matches())
-        assertTrue(expectedPattern.matcher(service.generateOib()).matches())
-        assertTrue(expectedPattern.matcher(service.generateOib()).matches())
-        assertTrue(expectedPattern.matcher(service.generateOib()).matches())
-        assertTrue(expectedPattern.matcher(service.generateOib()).matches())
-        assertTrue(expectedPattern.matcher(service.generateOib()).matches())
-        assertTrue(expectedPattern.matcher(service.generateOib()).matches())
+        val generatedOibs = listOf(
+            service.generateOib(),
+            service.generateOib(),
+            service.generateOib(),
+            service.generateOib(),
+            service.generateOib(),
+            service.generateOib(),
+            service.generateOib(),
+            service.generateOib(),
+            service.generateOib(),
+            service.generateOib()
+        )
+
+        for(generatedOib in generatedOibs) {
+            assertTrue(expectedPattern.matcher(generatedOib).matches())
+            assertTrue(service.validate(generatedOib));
+        }
     }
 
     @Test
