@@ -33,9 +33,6 @@ class WebSecurityConfig {
         http.csrf().disable();
 
         http
-            .oauth2Login()
-
-        http
             .logout()
             .logoutUrl("/logout")
             .logoutSuccessHandler(logoutHandler());
