@@ -32,6 +32,6 @@ USER $APPLICATION_USER
 
 COPY --from=0 --chown=1200:1200 $APPLICATION_HOME .
 
-EXPOSE 25100
+EXPOSE 25000
 
-ENTRYPOINT ["java", "-jar", "devtools-root-boot.jar"]
+CMD java $JAVA_OPTS -jar devtools-root-boot.jar
