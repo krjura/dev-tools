@@ -1,4 +1,6 @@
-FROM docker.krjura.org/dev-tools/java-exec-env:v1
+FROM docker.krjura.org/dev-tools/java-exec-env:1
+
+LABEL maintainer="Krešimir Jurasović <krjura@outlook.com>"
 
 ENV APPLICATION_HOME=/opt/dev-tools \
     APPLICATION_USER=dt \
@@ -15,22 +17,8 @@ RUN useradd --create-home --uid 1200 $APPLICATION_USER \
     && chmod -R a-w,o-rwx $APPLICATION_HOME \
     && chmod -R ug+w $APPLICATION_HOME/running $APPLICATION_HOME/logs $APPLICATION_HOME/tmp
 
-
-FROM docker.krjura.org/dev-tools/java-exec-env:v1
-
-LABEL maintainer="Krešimir Jurasović <krjura@outlook.com>"
-
-ENV APPLICATION_HOME=/opt/dev-tools \
-    APPLICATION_USER=dt \
-    APPLICATION_GROUP=dt
-
 WORKDIR /opt/dev-tools
-
-RUN useradd --create-home --uid 1200 $APPLICATION_USER
-
 USER $APPLICATION_USER
-
-COPY --from=0 --chown=1200:1200 $APPLICATION_HOME .
 
 EXPOSE 25000
 

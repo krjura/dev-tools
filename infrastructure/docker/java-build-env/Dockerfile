@@ -1,8 +1,7 @@
 FROM ubuntu:19.04
 
 RUN apt-get -y update \
-    && apt-get -y upgrade \
-    && apt-get -y install sudo less vim wget tar unzip git openjdk-11-jdk-headless \
+    && apt-get -y install git openjdk-11-jdk-headless \
     && apt-get clean \
     && rm -rf /var/cache/* /tmp/* /var/tmp/*
 

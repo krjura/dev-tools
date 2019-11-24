@@ -1,8 +1,5 @@
 FROM node:10.15.0
 
-RUN apt-get -y update \
-    && apt-get -y upgrade
-
 RUN mkdir -p /opt/node/npm-global \
     && chown -R node:node /opt/node/npm-global \
     && chmod a+rw /opt/node/npm-global \

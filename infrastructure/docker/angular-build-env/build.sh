@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t docker.krjura.org/dev-tools/angular-build-env:life-v1 .
+docker build -t docker.krjura.org/dev-tools/angular-build-env:1 .

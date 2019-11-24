@@ -1,0 +1,49 @@
+definitions:
+  caches:
+    gradleall: /opt/cache/gradle
+    nodemodules: frontend/angular-web/node_modules
+  steps:
+    - step: &build-and-test-java
+        name: "Build and test Java"
+        image:
+          name: docker.krjura.org/events/java-build-env:1
+          username: $KRJURA_NEXUS3_USERNAME
+          password: $KRJURA_NEXUS3_PASSWORD
+        caches:
+          - gradleall
+        script:
+          - bash ./gradlew --no-daemon --info -Dspring.profiles.active=test,jenkins build bootJar
+        artifacts:
+          - build/libs/**
+    - step: &build-angular
+        name: "Build Angular"
+        image:
+          name: docker.krjura.org/dev-tools/angular-build-env:1
+          username: $KRJURA_NEXUS3_USERNAME
+          password: $KRJURA_NEXUS3_PASSWORD
+        caches:
+          - node
+        script:
+          - bash ./frontend/angular-web/build-frontend.sh
+        artifacts:
+          - frontend/angular-web/dist/**
+    - step: &build-docker
+        name: "Build docker"
+        image:
+          name: ubuntu:19.04
+        script:
+          - docker login -u $KRJURA_NEXUS3_USERNAME -p $KRJURA_NEXUS3_PASSWORD docker.krjura.org
+          - bash infrastructure/bitbucket/docker-prepare-dist.sh
+          - docker build -t docker.krjura.org/dev-tools/dev-tools:$BITBUCKET_BUILD_NUMBER .
+          - docker push docker.krjura.org/dev-tools/dev-tools:$BITBUCKET_BUILD_NUMBER
+        services:
+          - docker
+pipelines:
+  default:
+    - step: *build-and-test-java
+    - step: *build-angular
+  branches:
+    master:
+      - step: *build-and-test-java
+      - step: *build-angular
+      - step: *build-docker
