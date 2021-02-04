@@ -1,7 +1,7 @@
 package org.krjura.devtools.controllers
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.krjura.devtools.enums.CustomHeaders
 import org.krjura.devtools.support.TestBase
 import org.springframework.http.MediaType

@@ -16,8 +16,8 @@ class PasswordController(val service: PasswordGeneratorService) {
 
     @PostMapping(
         value = ["/api/v1/password/generate"],
-        consumes = [MediaType.APPLICATION_JSON_UTF8_VALUE],
-        produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun generatePassword(@RequestBody @Valid request: PasswordRequest): ResponseEntity<PasswordResponse> {
 

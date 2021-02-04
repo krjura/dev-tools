@@ -1,8 +1,8 @@
 package org.krjura.devtools.features.hroib
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import org.krjura.devtools.features.hroib.services.HrOibService
 import java.util.regex.Pattern
 

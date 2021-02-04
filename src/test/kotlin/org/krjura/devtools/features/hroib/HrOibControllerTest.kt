@@ -1,7 +1,7 @@
 package org.krjura.devtools.features.hroib
 
 import org.assertj.core.api.Assertions
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.krjura.devtools.features.hroib.controller.pojo.HrOibGenerateResponse
 import org.krjura.devtools.features.hroib.controller.pojo.HrOibValidateResponse
 import org.krjura.devtools.support.TestBase

@@ -13,7 +13,7 @@ class UserInfoController {
 
     @GetMapping(
         value = ["/api/v1/auth/user-info"],
-        produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun userInfo(): Mono<ResponseEntity<UserInfoResponse>> {
         return ReactiveSecurityContextHolder

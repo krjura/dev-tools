@@ -12,7 +12,7 @@ class UuidController {
 
     @GetMapping(
         value = ["/api/v1/password/generate"],
-        produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun generateType4Uuid(): ResponseEntity<UuidWebResponse> {
         return ResponseEntity.ok(UuidWebResponse(UUID.randomUUID().toString()));

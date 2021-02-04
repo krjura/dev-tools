@@ -4,7 +4,7 @@ import org.krjura.devtools.features.pki.enums.PkiAlgorithm
 import org.krjura.devtools.features.pki.enums.PkiKeySizes
 
 import org.assertj.core.api.Assertions.assertThat;
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class PkiServiceTest {
 

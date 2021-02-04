@@ -1,7 +1,5 @@
 package org.krjura.devtools.features.pki.controller
 
-import org.assertj.core.api.Assertions
-import org.junit.Test
 import org.krjura.devtools.features.pki.controller.pojo.GeneratePairRequest
 import org.krjura.devtools.features.pki.controller.pojo.GeneratePairResponse
 import org.krjura.devtools.features.pki.enums.PkiAlgorithm
@@ -13,6 +11,7 @@ import reactor.core.publisher.Mono
 import reactor.core.publisher.toMono
 
 import org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test
 
 class PkiControllerTest: TestBase() {
 
@@ -23,14 +22,14 @@ class PkiControllerTest: TestBase() {
         val response: FluxExchangeResult<GeneratePairResponse> = webClient
             .post()
             .uri("/api/v1/pki/generate-pair")
-            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .body(Mono.just(request), GeneratePairRequest::class.java)
             .exchange()
             .expectStatus().isOk
             .returnResult(GeneratePairResponse::class.java);
 
         val responseBody = response.responseBody.toMono().block();
-        Assertions.assertThat(responseBody).isNotNull
+        assertThat(responseBody).isNotNull
 
         responseBody?.let {
             assertThat(responseBody.algorithm).isEqualTo(request.algorithm);

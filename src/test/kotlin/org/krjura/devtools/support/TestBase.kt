@@ -1,17 +1,16 @@
 package org.krjura.devtools.support
 
 import com.fasterxml.jackson.core.JsonProcessingException
-import org.junit.runner.RunWith
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.beans.factory.annotation.Autowired
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.junit.Before
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.extension.ExtendWith
 import java.io.IOException
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.context.ApplicationContext
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-
-@RunWith(SpringJUnit4ClassRunner::class)
+@ExtendWith(SpringExtension::class)
 @ProjectTest
 abstract class TestBase {
 
@@ -23,7 +22,7 @@ abstract class TestBase {
     @Autowired
     lateinit var objectMapper: ObjectMapper;
 
-    @Before
+    @BeforeEach
     fun beforeTestBase() {
 
         this.webClient = WebTestClient

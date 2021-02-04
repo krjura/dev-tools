@@ -15,8 +15,8 @@ class PkiController(val service: PkiService) {
 
     @PostMapping(
         value = ["/api/v1/pki/generate-pair"],
-        consumes = [MediaType.APPLICATION_JSON_UTF8_VALUE],
-        produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun generateKeyPair(@RequestBody @Valid request: GeneratePairRequest): ResponseEntity<GeneratePairResponse> {
 

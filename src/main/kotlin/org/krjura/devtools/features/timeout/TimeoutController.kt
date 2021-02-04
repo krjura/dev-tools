@@ -14,7 +14,7 @@ class TimeoutController(val service: PkiService) {
 
     @PostMapping(
         value = ["/api/v1/timeout"],
-        produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     @ResponseBody
     fun postTimeout(
@@ -29,7 +29,7 @@ class TimeoutController(val service: PkiService) {
 
     @GetMapping(
         value = ["/api/v1/timeout"],
-        produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     @ResponseBody
     fun getTimeout(@RequestParam(name = "duration", defaultValue = "10") duration:Long ): Mono<TimeoutResponse> {

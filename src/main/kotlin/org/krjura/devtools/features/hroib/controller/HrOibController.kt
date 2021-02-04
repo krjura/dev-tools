@@ -14,7 +14,7 @@ class HrOibController(var service: HrOibService) {
 
     @GetMapping(
         value = ["/api/v1/hroib/generate"],
-        produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun generateOib(): ResponseEntity<HrOibGenerateResponse> {
         return ResponseEntity.ok(HrOibGenerateResponse(service.generateOib()))
@@ -22,7 +22,7 @@ class HrOibController(var service: HrOibService) {
 
     @GetMapping(
         value = ["/api/v1/hroib/validate/{oib}"],
-        produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun validateOib(@PathVariable("oib") oib: String): ResponseEntity<HrOibValidateResponse> {
         return ResponseEntity.ok(HrOibValidateResponse(service.validate(oib)))

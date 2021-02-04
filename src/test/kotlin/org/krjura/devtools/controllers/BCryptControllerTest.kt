@@ -1,11 +1,11 @@
 package org.krjura.devtools.controllers
 
-import org.junit.Test
 import org.krjura.devtools.enums.CustomHeaders
 import org.krjura.devtools.support.TestBase
 import org.springframework.http.MediaType
 import reactor.core.publisher.Mono
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.krjura.devtools.ex.response.ErrorResponse
 import org.krjura.devtools.features.bcrypt.pojo.BCryptWebRequest
 import org.krjura.devtools.features.bcrypt.pojo.BCryptWebResponse
@@ -22,7 +22,7 @@ class BCryptControllerTest: TestBase() {
         val response = webClient
             .post()
             .uri("/api/v1/bcrypt/password")
-            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .body(Mono.just(request), BCryptWebRequest::class.java)
             .exchange()
             .expectStatus().isOk
@@ -50,7 +50,7 @@ class BCryptControllerTest: TestBase() {
         val response = webClient
             .post()
             .uri("/api/v1/bcrypt/password")
-            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .body(Mono.just(request), BCryptWebRequest::class.java)
             .exchange()
             .expectStatus().isBadRequest
@@ -78,7 +78,7 @@ class BCryptControllerTest: TestBase() {
         val response = webClient
             .post()
             .uri("/api/v1/bcrypt/password")
-            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .body(Mono.just(request), BCryptWebRequest::class.java)
             .exchange()
             .expectStatus().isBadRequest
@@ -106,7 +106,7 @@ class BCryptControllerTest: TestBase() {
         val response = webClient
             .post()
             .uri("/api/v1/bcrypt/password")
-            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .body(Mono.just(request), BCryptWebRequest::class.java)
             .exchange()
             .expectStatus().isBadRequest

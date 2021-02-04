@@ -3,7 +3,7 @@ package org.krjura.devtools.features.password.services
 import org.krjura.devtools.features.password.services.pojo.PasswordGeneratorConfig
 
 import org.assertj.core.api.Assertions.assertThat;
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.util.regex.Pattern
 
 class PasswordGeneratorServiceTest {

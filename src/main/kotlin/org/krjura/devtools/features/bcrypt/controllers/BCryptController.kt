@@ -15,8 +15,8 @@ class BCryptController(val service: BCryptService) {
 
     @PostMapping(
         value = ["/api/v1/bcrypt/password"],
-        consumes = [MediaType.APPLICATION_JSON_UTF8_VALUE],
-        produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun calculate(@RequestBody @Valid request: BCryptWebRequest): ResponseEntity<BCryptWebResponse> {
 

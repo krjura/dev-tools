@@ -1,6 +1,5 @@
 package org.krjura.devtools.features.password.controllers
 
-import org.junit.Test
 import org.krjura.devtools.features.password.controllers.pojo.PasswordRequest
 import org.krjura.devtools.features.password.controllers.pojo.PasswordResponse
 import org.krjura.devtools.support.TestBase
@@ -9,6 +8,7 @@ import org.springframework.test.web.reactive.server.FluxExchangeResult
 import reactor.core.publisher.Mono
 
 import org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test
 import reactor.core.publisher.toMono
 
 class PasswordControllerTest: TestBase() {
@@ -20,7 +20,7 @@ class PasswordControllerTest: TestBase() {
         val response: FluxExchangeResult<PasswordResponse> = webClient
             .post()
             .uri("/api/v1/password/generate")
-            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .body(Mono.just(request), PasswordRequest::class.java)
             .exchange()
             .expectStatus().isOk
