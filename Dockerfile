@@ -1,4 +1,4 @@
-FROM docker.krjura.org/dev-tools/java-exec-env:1
+FROM docker.krjura.org/dev-tools/java-exec-env:v2
 
 LABEL maintainer="Krešimir Jurasović <krjura@outlook.com>"
 
@@ -9,7 +9,7 @@ ENV APPLICATION_HOME=/opt/dev-tools \
 COPY build/libs/devtools-root-boot.jar $APPLICATION_HOME/devtools-root-boot.jar
 COPY frontend/angular-web/dist/angular-web $APPLICATION_HOME/web-resources
 
-RUN useradd --create-home --uid 1200 $APPLICATION_USER \
+RUN adduser --disabled-password --uid 1200 $APPLICATION_USER \
     && mkdir -p $APPLICATION_HOME/logs \
     && mkdir -p $APPLICATION_HOME/tmp \
     && mkdir -p $APPLICATION_HOME/running \
