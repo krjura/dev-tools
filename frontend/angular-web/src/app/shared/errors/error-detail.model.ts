@@ -1,4 +1,4 @@
-class ErrorDetailModel {
+export class ErrorDetailModel {
   reason: string;
   message?: string;
   attributeName?: string;

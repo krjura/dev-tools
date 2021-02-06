@@ -6,6 +6,8 @@ import { Validators } from '@angular/forms';
 import { GlobalAlertService } from '../../shared/services/global-alert.service';
 import { StorageService } from '../../shared/services/storage.service';
 
+import { BCryptWebResponseModel } from './b-crypt-web-response.model';
+
 const ITERATIONS_LOCAL_STORAGE_KEY = 'BCryptPasswordComponent.iterations';
 
 @Component({

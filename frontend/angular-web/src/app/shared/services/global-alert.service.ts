@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injector, Injectable } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { ErrorResponseModel } from '../errors/error-response.model'
 
 @Injectable({
   providedIn: 'root',
@@ -9,9 +10,13 @@ import { TranslateService } from '@ngx-translate/core';
 export class GlobalAlertService {
 
   constructor(
-    private toastrService: ToastrService,
+    @Inject(Injector) private injector: Injector,
     protected translate: TranslateService ) {
 
+  }
+
+  private get toastrService(): ToastrService {
+    return this.injector.get(ToastrService);
   }
 
   errorResponseAlert(

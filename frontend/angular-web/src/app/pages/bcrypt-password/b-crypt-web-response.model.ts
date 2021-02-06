@@ -1,4 +1,4 @@
-class BCryptWebResponseModel {
+export class BCryptWebResponseModel {
 
   iterations: number;
   data: string;
