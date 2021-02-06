@@ -17,6 +17,7 @@ class WebSecurityConfig {
         http
             .authorizeExchange()
             .pathMatchers("/actuator/health").permitAll()
+            .pathMatchers("/actuator/health/**").permitAll()
             .pathMatchers("/actuator").hasAuthority("ADMIN")
             .pathMatchers("/actuator/**").hasAuthority("ADMIN")
             .pathMatchers("/**").permitAll();
