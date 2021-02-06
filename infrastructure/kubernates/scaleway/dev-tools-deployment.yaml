@@ -33,7 +33,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: "dev-tools"
-          image: "rg.fr-par.scw.cloud/krjura/dev-tools/dev-tools:10"
+          image: "rg.fr-par.scw.cloud/krjura/dev-tools/dev-tools:13"
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
