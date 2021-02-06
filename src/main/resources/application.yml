@@ -17,12 +17,12 @@ server:
   port: 25000
   compression:
     enabled: true
-  use-forward-headers: true
+  forward-headers-strategy: framework
 
 spring:
   main:
     allow-bean-definition-overriding: true
   pid:
-    file: dev-tools.pid
+    file: /tmp/dev-tools.pid
   application:
     name: dev-tools
