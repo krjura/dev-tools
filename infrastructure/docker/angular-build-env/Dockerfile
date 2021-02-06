@@ -1,4 +1,4 @@
-FROM node:10.15.0
+FROM node:14.15.4-slim
 
 RUN mkdir -p /opt/node/npm-global \
     && chown -R node:node /opt/node/npm-global \

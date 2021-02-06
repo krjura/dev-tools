@@ -18,7 +18,7 @@ definitions:
     - step: &build-angular
         name: "Build Angular"
         image:
-          name: docker.krjura.org/dev-tools/angular-build-env:1
+          name: docker.krjura.org/dev-tools/angular-build-env:v2
           username: $KRJURA_NEXUS3_USERNAME
           password: $KRJURA_NEXUS3_PASSWORD
         caches:
