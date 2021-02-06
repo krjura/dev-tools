@@ -22,7 +22,7 @@ definitions:
           username: $KRJURA_NEXUS3_USERNAME
           password: $KRJURA_NEXUS3_PASSWORD
         caches:
-          - node
+          - nodemodules
         script:
           - bash ./frontend/angular-web/build-frontend.sh
         artifacts:
