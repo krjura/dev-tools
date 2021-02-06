@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { PartialObserver } from 'rxjs/src/internal/types';
+import { BehaviorSubject, PartialObserver } from 'rxjs';
 import { UserInfoEventModel } from '../events/user-info-event.model';
 import { EventModel } from '../events/event.model';
 
