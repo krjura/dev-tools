@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Base64EncoderComponent } from './base64-encoder.component';
 
@@ -6,7 +6,7 @@ describe('Base64EncoderComponent', () => {
   let component: Base64EncoderComponent;
   let fixture: ComponentFixture<Base64EncoderComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ Base64EncoderComponent ]
     })

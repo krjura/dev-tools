@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PkiKeyGeneratorComponent } from './pki-key-generator.component';
 
@@ -6,7 +6,7 @@ describe('PkiKeyGeneratorComponent', () => {
   let component: PkiKeyGeneratorComponent;
   let fixture: ComponentFixture<PkiKeyGeneratorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PkiKeyGeneratorComponent ]
     })

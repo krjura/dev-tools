@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { UuidGeneratorComponent } from './uuid-generator.component';
 
@@ -6,7 +6,7 @@ describe('UuidGeneratorComponent', () => {
   let component: UuidGeneratorComponent;
   let fixture: ComponentFixture<UuidGeneratorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ UuidGeneratorComponent ]
     })

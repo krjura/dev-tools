@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { GlobalNavigationComponent } from './global-navigation.component';
 
@@ -6,7 +6,7 @@ describe('GlobalNavigationComponent', () => {
   let component: GlobalNavigationComponent;
   let fixture: ComponentFixture<GlobalNavigationComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GlobalNavigationComponent ]
     })

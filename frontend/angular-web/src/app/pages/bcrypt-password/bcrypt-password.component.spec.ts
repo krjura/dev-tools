@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BCryptPasswordComponent } from './bcrypt-password.component';
 
@@ -6,7 +6,7 @@ describe('BCryptPasswordComponent', () => {
   let component: BCryptPasswordComponent;
   let fixture: ComponentFixture<BCryptPasswordComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BCryptPasswordComponent ]
     })
