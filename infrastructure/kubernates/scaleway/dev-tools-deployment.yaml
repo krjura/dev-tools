@@ -61,5 +61,8 @@ spec:
               port: 25000
             initialDelaySeconds: 0
             periodSeconds: 10
+          env:
+            - name: "JAVA_TOOL_OPTIONS"
+              value: "-Xmx256m"
       imagePullSecrets:
         - name: regcred
