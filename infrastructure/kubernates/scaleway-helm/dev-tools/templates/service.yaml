@@ -1,0 +1,17 @@
+{{- if .Values.service.enabled }}
+apiVersion: "v1"
+kind: Service
+metadata:
+  name: {{ .Values.service.name | quote }}
+  namespace: {{ .Values.namespace | quote }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.labels.app | quote }}
+spec:
+  ports:
+    - name: "web"
+      port: {{ .Values.containers.default.port }}
+      targetPort: {{ .Values.containers.default.port }}
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ .Values.labels.app | quote }}
+{{- end }}

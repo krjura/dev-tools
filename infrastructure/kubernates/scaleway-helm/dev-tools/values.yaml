@@ -1,0 +1,53 @@
+namespace: "dev-tools"
+
+
+deployment:
+  name: "dev-tools"
+  replicas: 1
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1200
+    runAsGroup: 1200
+    fsGroup: 1200
+    
+service:
+  enabled: true
+  name: "dev-tools"
+    
+containers:
+  default:
+    name: "dev-tools"
+    image: "rg.fr-par.scw.cloud/krjura/dev-tools/dev-tools:13"
+    imagePullSecrets: "regcred"
+    port: 25000
+    resources:
+      requests:
+        memory: "500Mi"
+        cpu: "100m"
+    probles:
+      timeoutSeconds: 5
+      startupProbe:
+        enabled: true
+        url: "/actuator/health/liveness"
+        failureThreshold: 12
+        periodSeconds: 10
+      livenessProbe:
+        enabled: true     
+        url: "/actuator/health/liveness"
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 3
+      readinessProbe:
+        enabled: true     
+        url: "/actuator/health/readiness"
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 3
+    env:
+      - name: "JAVA_TOOL_OPTIONS"
+        value: "-Xmx256m"
+  
+labels:
+  app: "dev-tools"

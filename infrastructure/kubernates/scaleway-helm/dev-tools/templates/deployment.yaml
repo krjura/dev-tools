@@ -1,0 +1,84 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name:  {{ .Values.deployment.name | quote }}
+  namespace:  {{ .Values.namespace | quote }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.labels.app | quote }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.labels.app | quote }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1      
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.labels.app | quote }}
+    spec:
+      securityContext:
+        runAsNonRoot: {{ .Values.deployment.securityContext.runAsNonRoot }}
+        runAsUser: {{ .Values.deployment.securityContext.runAsUser }}
+        runAsGroup: {{ .Values.deployment.securityContext.runAsGroup }}
+        fsGroup: {{ .Values.deployment.securityContext.fsGroup }}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app.kubernetes.io/name"
+                    operator: In
+                    values:
+                      - {{ .Values.labels.app | quote }}
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: {{ .Values.containers.default.name | quote }}
+          image: {{ .Values.containers.default.image | quote }}
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+          resources:
+            requests:
+              memory: {{ .Values.containers.default.resources.requests.memory | quote }}
+              cpu: {{ .Values.containers.default.resources.requests.cpu | quote }}
+          {{- if .Values.containers.default.probles.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: {{ .Values.containers.default.probles.startupProbe.url | quote }}
+              port: {{ .Values.containers.default.port }}
+            failureThreshold: {{ .Values.containers.default.probles.startupProbe.failureThreshold }}
+            periodSeconds: {{ .Values.containers.default.probles.startupProbe.periodSeconds }}
+          {{- end }}
+          {{- if .Values.containers.default.probles.livenessProbe.enabled }}     
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.containers.default.probles.livenessProbe.url | quote }}
+              port: {{ .Values.containers.default.port }}
+            initialDelaySeconds: {{ .Values.containers.default.probles.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.containers.default.probles.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.containers.default.probles.timeoutSeconds }}
+            successThreshold: {{ .Values.containers.default.probles.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.containers.default.probles.livenessProbe.failureThreshold }}
+          {{- end }}            
+          {{- if .Values.containers.default.probles.readinessProbe.enabled }}          
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.containers.default.probles.readinessProbe.url | quote }}
+              port: {{ .Values.containers.default.port }}
+            initialDelaySeconds: {{ .Values.containers.default.probles.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.containers.default.probles.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.containers.default.probles.timeoutSeconds }}
+            successThreshold: {{ .Values.containers.default.probles.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.containers.default.probles.readinessProbe.failureThreshold }}
+          {{- end }}            
+          env:
+           {{- range $.Values.containers.default.env }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+           {{- end }}              
+      imagePullSecrets:
+        - name: {{ .Values.containers.default.imagePullSecrets | quote }}
