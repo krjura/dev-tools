@@ -1,5 +1,6 @@
 package org.krjura.devtools.config
 
+import org.krjura.devtools.auth.AllowPrivateAndLocalIps
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
@@ -18,6 +19,7 @@ class WebSecurityConfig {
             .authorizeExchange()
             .pathMatchers("/actuator/health").permitAll()
             .pathMatchers("/actuator/health/**").permitAll()
+            .pathMatchers("/actuator/metrics/**").access(AllowPrivateAndLocalIps())
             .pathMatchers("/actuator").hasAuthority("ADMIN")
             .pathMatchers("/actuator/**").hasAuthority("ADMIN")
             .pathMatchers("/**").permitAll();
