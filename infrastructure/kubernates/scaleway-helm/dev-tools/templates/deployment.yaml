@@ -19,6 +19,9 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: {{ .Values.labels.app | quote }}
+        prometheus.io/scrape: "true"
+        prometheus.io/port: {{ .Values.containers.default.port | quote }}
+        prometheus.io/path: "/actuator/prometheus"
     spec:
       securityContext:
         runAsNonRoot: {{ .Values.deployment.securityContext.runAsNonRoot }}
