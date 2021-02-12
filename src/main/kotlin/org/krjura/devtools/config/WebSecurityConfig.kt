@@ -1,5 +1,6 @@
 package org.krjura.devtools.config
 
+import org.krjura.devtools.auth.AllowLocalIps
 import org.krjura.devtools.auth.AllowPrivateAndLocalIps
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -20,8 +21,7 @@ class WebSecurityConfig {
             .pathMatchers("/actuator/health").permitAll()
             .pathMatchers("/actuator/health/**").permitAll()
             .pathMatchers("/actuator/metrics/**").access(AllowPrivateAndLocalIps())
-            .pathMatchers("/actuator").hasAuthority("ADMIN")
-            .pathMatchers("/actuator/**").hasAuthority("ADMIN")
+            .pathMatchers("/actuator/**").access(AllowLocalIps())
             .pathMatchers("/**").permitAll();
 
         http
