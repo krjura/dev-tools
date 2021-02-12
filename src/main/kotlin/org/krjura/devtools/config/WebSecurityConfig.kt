@@ -21,6 +21,7 @@ class WebSecurityConfig {
             .pathMatchers("/actuator/health").permitAll()
             .pathMatchers("/actuator/health/**").permitAll()
             .pathMatchers("/actuator/metrics/**").access(AllowPrivateAndLocalIps())
+            .pathMatchers("/actuator/prometheus").access(AllowPrivateAndLocalIps())
             .pathMatchers("/actuator/**").access(AllowLocalIps())
             .pathMatchers("/**").permitAll();
 

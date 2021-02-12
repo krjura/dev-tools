@@ -38,18 +38,23 @@ dependencies {
 
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
 
+    // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "org.jetbrains.kotlin:kotlin-reflect"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
     // javax.validation
     implementation 'org.hibernate:hibernate-validator:6.0.13.Final'
+
+    // micrometer
+    implementation 'io.micrometer:micrometer-registry-prometheus'
 
     // logging
     implementation 'org.slf4j:slf4j-api'
     implementation 'ch.qos.logback:logback-classic'
     implementation 'org.slf4j:log4j-over-slf4j'
+
+    // testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 compileKotlin {
