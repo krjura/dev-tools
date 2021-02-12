@@ -4,10 +4,15 @@ management:
       show-details: always
       probes:
         enabled: true
+
   endpoints:
     web:
       exposure:
         include: "*"
+  metrics:
+    enable:
+      logback: false
+      system: false
 
 server:
   servlet:
