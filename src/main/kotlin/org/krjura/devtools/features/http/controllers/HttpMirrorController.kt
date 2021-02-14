@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest
 class HttpMirrorController {
 
   @RequestMapping(
-    value = ["/api/v1/headers/mirror"],
+    value = ["/api/v1/http/mirror"],
     method = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE]
   )
   fun process(

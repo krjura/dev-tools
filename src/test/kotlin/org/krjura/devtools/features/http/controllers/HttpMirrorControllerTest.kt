@@ -16,7 +16,7 @@ class HttpMirrorControllerTest : TestBase() {
   @Test
   fun testGetMethod() {
     getMockMvc()
-      .perform(get("/api/v1/headers/mirror")
+      .perform(get("/api/v1/http/mirror")
         .header("Test1", "Test1")
         .header("Test2", "Test2")
       )
@@ -29,7 +29,7 @@ class HttpMirrorControllerTest : TestBase() {
   @Test
   fun testPostMethod() {
     getMockMvc()
-      .perform(post("/api/v1/headers/mirror")
+      .perform(post("/api/v1/http/mirror")
         .header("Test1", "Test1")
         .contentType(MediaType.TEXT_PLAIN)
         .content("demo")
@@ -44,7 +44,7 @@ class HttpMirrorControllerTest : TestBase() {
   @Test
   fun testPutMethod() {
     getMockMvc()
-      .perform(put("/api/v1/headers/mirror")
+      .perform(put("/api/v1/http/mirror")
         .header("Test1", "Test1")
         .contentType(MediaType.TEXT_PLAIN)
         .content("demo")
@@ -59,7 +59,7 @@ class HttpMirrorControllerTest : TestBase() {
   @Test
   fun testDeleteMethod() {
     getMockMvc()
-      .perform(delete("/api/v1/headers/mirror")
+      .perform(delete("/api/v1/http/mirror")
         .header("Test1", "Test1")
         .header("Test2", "Test2")
       )
