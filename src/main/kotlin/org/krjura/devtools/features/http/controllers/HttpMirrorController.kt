@@ -30,8 +30,15 @@ class HttpMirrorController {
           headerName -> headers["XX-$headerName"] = request.getHeaders(headerName).toList()
       })
 
-    headers["XX-Method"] = request.method
-    headers["Content-Type"] = request.contentType;
+    headers["XX-Method"] = request.method?: "unknown"
+    if(request.contentType != null) {
+      headers["Content-Type"] = request.contentType;
+    }
+    headers["XX-Remote-Addr"] = request.remoteAddr?: "unknown"
+    headers["XX-Remote-Host"] = request.remoteHost?: "unknown"
+    headers["XX-Remote-Port"] = request.remotePort.toString() ?: "unknown"
+    headers["XX-Remote-Protocol"] = request.protocol?: "unknown"
+    headers["XX-Remote-Scheme"] = request.scheme?: "unknown"
 
     return ResponseEntity
       .ok()

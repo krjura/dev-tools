@@ -24,6 +24,11 @@ class HttpMirrorControllerTest : TestBase() {
       .andExpect(header().string("XX-Test1", "Test1"))
       .andExpect(header().string("XX-Test2", "Test2"))
       .andExpect(header().string("XX-method", "GET"))
+      .andExpect(header().string("XX-Remote-Addr", "127.0.0.1"))
+      .andExpect(header().string("XX-Remote-Host", "localhost"))
+      .andExpect(header().exists("XX-Remote-Port"))
+      .andExpect(header().string("XX-Remote-Protocol", "HTTP/1.1"))
+      .andExpect(header().string("XX-Remote-Scheme", "http"))
   }
 
   @Test
@@ -38,6 +43,11 @@ class HttpMirrorControllerTest : TestBase() {
       .andExpect(header().string("XX-Test1", "Test1"))
       .andExpect(header().string("XX-content-type", "text/plain"))
       .andExpect(header().string("XX-method", "POST"))
+      .andExpect(header().string("XX-Remote-Addr", "127.0.0.1"))
+      .andExpect(header().string("XX-Remote-Host", "localhost"))
+      .andExpect(header().exists("XX-Remote-Port"))
+      .andExpect(header().string("XX-Remote-Protocol", "HTTP/1.1"))
+      .andExpect(header().string("XX-Remote-Scheme", "http"))
       .andExpect(content().string("demo"))
   }
 
@@ -53,6 +63,11 @@ class HttpMirrorControllerTest : TestBase() {
       .andExpect(header().string("XX-Test1", "Test1"))
       .andExpect(header().string("XX-content-type", "text/plain"))
       .andExpect(header().string("XX-method", "PUT"))
+      .andExpect(header().string("XX-Remote-Addr", "127.0.0.1"))
+      .andExpect(header().string("XX-Remote-Host", "localhost"))
+      .andExpect(header().exists("XX-Remote-Port"))
+      .andExpect(header().string("XX-Remote-Protocol", "HTTP/1.1"))
+      .andExpect(header().string("XX-Remote-Scheme", "http"))
       .andExpect(content().string("demo"))
   }
 
@@ -67,5 +82,10 @@ class HttpMirrorControllerTest : TestBase() {
       .andExpect(header().string("XX-Test1", "Test1"))
       .andExpect(header().string("XX-Test2", "Test2"))
       .andExpect(header().string("XX-method", "DELETE"))
+      .andExpect(header().string("XX-Remote-Addr", "127.0.0.1"))
+      .andExpect(header().string("XX-Remote-Host", "localhost"))
+      .andExpect(header().exists("XX-Remote-Port"))
+      .andExpect(header().string("XX-Remote-Protocol", "HTTP/1.1"))
+      .andExpect(header().string("XX-Remote-Scheme", "http"))
   }
 }
