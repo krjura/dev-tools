@@ -22,9 +22,9 @@ class PasswordController(val service: PasswordGeneratorService) {
     fun generatePassword(@RequestBody @Valid request: PasswordRequest): ResponseEntity<PasswordResponse> {
 
         val serviceRequest = PasswordGeneratorConfig(
-            request.useCapitalLetters, request.useSmallLetters, request.useNumbers, request.characterCount);
+            request.useCapitalLetters, request.useSmallLetters, request.useNumbers, request.characterCount)
 
-        val password = service.generatePassword(serviceRequest);
+        val password = service.generatePassword(serviceRequest)
 
         return ResponseEntity.ok(PasswordResponse(password))
     }

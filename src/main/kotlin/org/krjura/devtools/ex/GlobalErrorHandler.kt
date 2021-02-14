@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import java.util.ArrayList
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.support.WebExchangeBindException
 
 @ControllerAdvice
 class GlobalErrorHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(WebExchangeBindException::class)
+    @ExceptionHandler(MethodArgumentNotValidException::class)
     @ResponseBody
-    fun handleWebExchangeBindException(ex: WebExchangeBindException): ErrorResponse {
+    fun handleWebExchangeBindException(ex: MethodArgumentNotValidException): ErrorResponse {
         val builder = ErrorResponseBuilder()
 
         val fieldErrors = ArrayList(ex.bindingResult.fieldErrors)

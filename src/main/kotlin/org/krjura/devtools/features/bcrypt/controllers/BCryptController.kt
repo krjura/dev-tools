@@ -20,7 +20,7 @@ class BCryptController(val service: BCryptService) {
     )
     fun calculate(@RequestBody @Valid request: BCryptWebRequest): ResponseEntity<BCryptWebResponse> {
 
-        val encoded = this.service.calculate(request.iterations, request.data);
+        val encoded = this.service.calculate(request.iterations, request.data)
 
         return ResponseEntity.ok(BCryptWebResponse(request.iterations, request.data, encoded))
     }

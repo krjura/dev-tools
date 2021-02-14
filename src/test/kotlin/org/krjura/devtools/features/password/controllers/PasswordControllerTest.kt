@@ -1,36 +1,41 @@
 package org.krjura.devtools.features.password.controllers
 
 import org.krjura.devtools.features.password.controllers.pojo.PasswordRequest
-import org.krjura.devtools.features.password.controllers.pojo.PasswordResponse
 import org.krjura.devtools.support.TestBase
 import org.springframework.http.MediaType
-import org.springframework.test.web.reactive.server.FluxExchangeResult
-import reactor.core.publisher.Mono
 
-import org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import reactor.core.publisher.toMono
+import org.krjura.devtools.features.password.controllers.pojo.PasswordResponse
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 class PasswordControllerTest: TestBase() {
 
     @Test
     fun generatePassword() {
-        val request = PasswordRequest(true, true, true, 20);
+        val request = PasswordRequest(
+            useCapitalLetters = true,
+            useSmallLetters = true,
+            useNumbers = true,
+            characterCount = 20
+        )
 
-        val response: FluxExchangeResult<PasswordResponse> = webClient
-            .post()
-            .uri("/api/v1/password/generate")
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(Mono.just(request), PasswordRequest::class.java)
-            .exchange()
-            .expectStatus().isOk
-            .returnResult(PasswordResponse::class.java);
+        val responseBody = getMockMvc()
+            .perform(post("/api/v1/password/generate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(toJson(request))
+            )
+            .andExpect(status().isOk)
+            .andReturn()
+            .response
+            .contentAsByteArray
 
-        val responseBody = response.responseBody.toMono().block();
-        assertThat(responseBody).isNotNull
+        val response = fromJson(responseBody, PasswordResponse::class.java)
+        assertThat(response).isNotNull
 
-        responseBody?.let {
-            assertThat(responseBody.password).containsPattern("[A-Za-z0-9]{20}")
+        response.let {
+            assertThat(response.password).containsPattern("[A-Za-z0-9]{20}")
         }
     }
 }

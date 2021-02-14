@@ -16,7 +16,7 @@ class Base64Controller(private val base64Service: Base64Service) {
         produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE]
     )
     fun decodeBase64Bytes(@RequestBody request: ByteArray): ResponseEntity<ByteArray> {
-        return ResponseEntity.ok(base64Service.decodeBytes(request));
+        return ResponseEntity.ok(base64Service.decodeBytes(request))
     }
 
     @PostMapping(
@@ -25,6 +25,6 @@ class Base64Controller(private val base64Service: Base64Service) {
         produces = [MediaType.TEXT_PLAIN_VALUE]
     )
     fun encodeBase64Bytes(@RequestBody request: ByteArray): ResponseEntity<String> {
-        return ResponseEntity.ok(base64Service.encodeBytes(request));
+        return ResponseEntity.ok(base64Service.encodeBytes(request))
     }
 }

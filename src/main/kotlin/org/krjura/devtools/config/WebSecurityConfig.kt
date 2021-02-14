@@ -1,29 +1,24 @@
 package org.krjura.devtools.config
 
-import org.krjura.devtools.auth.AllowLocalIps
-import org.krjura.devtools.auth.AllowPrivateAndLocalIps
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
-import org.springframework.security.config.web.server.ServerHttpSecurity
-import org.springframework.security.web.server.SecurityWebFilterChain
-import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler
-import java.net.URI
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.web.authentication.logout.ForwardLogoutSuccessHandler
 
 @Configuration
-@EnableWebFluxSecurity
-class WebSecurityConfig {
+@EnableWebSecurity
+class WebSecurityConfig: WebSecurityConfigurerAdapter() {
 
-    @Bean
-    fun springSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
+    override fun configure(http: HttpSecurity) {
         http
-            .authorizeExchange()
-            .pathMatchers("/actuator/health").permitAll()
-            .pathMatchers("/actuator/health/**").permitAll()
-            .pathMatchers("/actuator/metrics/**").access(AllowPrivateAndLocalIps())
-            .pathMatchers("/actuator/prometheus").access(AllowPrivateAndLocalIps())
-            .pathMatchers("/actuator/**").access(AllowLocalIps())
-            .pathMatchers("/**").permitAll();
+            .authorizeRequests()
+            .antMatchers("/actuator/health").permitAll()
+            .antMatchers("/actuator/health/**").permitAll()
+            .antMatchers("/actuator/metrics/**").access("hasIpAddress('10.0.0.0/8') or hasIpAddress('127.0.0.1')")
+            .antMatchers("/actuator/prometheus").access("hasIpAddress('10.0.0.0/8') or hasIpAddress('127.0.0.1')")
+            .antMatchers("/actuator/**").hasIpAddress("127.0.0.1")
+            .antMatchers("/**").permitAll();
 
         http
             .headers()
@@ -40,15 +35,9 @@ class WebSecurityConfig {
             .logout()
             .logoutUrl("/logout")
             .logoutSuccessHandler(logoutHandler());
-
-        return http.build();
     }
 
-    fun logoutHandler(): RedirectServerLogoutSuccessHandler {
-        val handler = RedirectServerLogoutSuccessHandler();
-
-        handler.setLogoutSuccessUrl(URI.create("/portal"))
-
-        return handler;
+    fun logoutHandler(): ForwardLogoutSuccessHandler {
+        return ForwardLogoutSuccessHandler("/portal");
     }
 }
