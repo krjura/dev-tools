@@ -17,7 +17,7 @@ service:
 containers:
   default:
     name: "dev-tools"
-    image: "rg.fr-par.scw.cloud/krjura/dev-tools/dev-tools:14"
+    image: "rg.fr-par.scw.cloud/krjura/dev-tools/dev-tools:17"
     imagePullSecrets: "regcred"
     port: 25000
     resources:
