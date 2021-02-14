@@ -13,11 +13,17 @@ deployment:
 service:
   enabled: true
   name: "dev-tools"
+
+ingress:
+  enabled: true
+  name: "dev-tools"
+  hostname: "dev-tools.krjura.org"
+  ingressClass: "haproxy"
     
 containers:
   default:
     name: "dev-tools"
-    image: "rg.fr-par.scw.cloud/krjura/dev-tools/dev-tools:17"
+    image: "rg.fr-par.scw.cloud/krjura/dev-tools/dev-tools:18"
     imagePullSecrets: "regcred"
     port: 25000
     resources:
