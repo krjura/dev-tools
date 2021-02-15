@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
 import java.io.IOException
 
-
 @ExtendWith(SpringExtension::class)
 @ProjectTest
 abstract class TestBase {

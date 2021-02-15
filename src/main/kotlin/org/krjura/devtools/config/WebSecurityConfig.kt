@@ -1,24 +1,32 @@
 package org.krjura.devtools.config
 
+import org.krjura.devtools.auth.MonitoringAuthorizationFilter
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.web.authentication.logout.ForwardLogoutSuccessHandler
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
+
+
+
 
 @Configuration
 @EnableWebSecurity
-class WebSecurityConfig: WebSecurityConfigurerAdapter() {
+class WebSecurityConfig(private val config: SecurityConfiguration): WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
         http
             .authorizeRequests()
             .antMatchers("/actuator/health").permitAll()
             .antMatchers("/actuator/health/**").permitAll()
-            .antMatchers("/actuator/metrics/**").access("hasIpAddress('10.0.0.0/8') or hasIpAddress('127.0.0.1')")
-            .antMatchers("/actuator/prometheus").access("hasIpAddress('10.0.0.0/8') or hasIpAddress('127.0.0.1')")
+            .antMatchers("/actuator/metrics").hasAuthority("ROLE_MONITORING")
+            .antMatchers("/actuator/metrics/**").hasAuthority("ROLE_MONITORING")
+            .antMatchers("/actuator/prometheus").hasAuthority("ROLE_MONITORING")
             .antMatchers("/actuator/**").hasIpAddress("127.0.0.1")
-            .antMatchers("/**").permitAll();
+            .antMatchers("/**").permitAll()
+            .and()
+            .addFilterBefore(MonitoringAuthorizationFilter(this.config), BasicAuthenticationFilter::class.java)
 
         http
             .headers()
