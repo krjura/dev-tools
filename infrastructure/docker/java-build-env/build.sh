@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t docker.krjura.org/dev-tools/java-build-env:v2 .
+docker build -t docker.krjura.org/dev-tools/java-build-env:v3 .
