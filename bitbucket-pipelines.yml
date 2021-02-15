@@ -6,7 +6,7 @@ definitions:
     - step: &build-and-test-java
         name: "Build and test Java"
         image:
-          name: docker.krjura.org/events/java-build-env:2
+          name: docker.krjura.org/dev-tools/java-build-env:v2
           username: $KRJURA_NEXUS3_USERNAME
           password: $KRJURA_NEXUS3_PASSWORD
         caches:
