@@ -6,9 +6,9 @@ definitions:
     - step: &build-and-test-java
         name: "Build and test Java"
         image:
-          name: docker.krjura.org/dev-tools/java-build-env:v3
-          username: $KRJURA_NEXUS3_USERNAME
-          password: $KRJURA_NEXUS3_PASSWORD
+          name: krjura/dev-tools-java-build-env:v3
+          username: $KRJURA_DOCKER_IO_USERNAME
+          password: $KRJURA_DOCKER_IO_PASSWORD
         caches:
           - gradleall
         script:
@@ -18,9 +18,9 @@ definitions:
     - step: &build-angular
         name: "Build Angular"
         image:
-          name: docker.krjura.org/dev-tools/angular-build-env:v2
-          username: $KRJURA_NEXUS3_USERNAME
-          password: $KRJURA_NEXUS3_PASSWORD
+          name: krjura/dev-tools-angular-build-env:v2
+          username: $KRJURA_DOCKER_IO_USERNAME
+          password: $KRJURA_DOCKER_IO_PASSWORD
         caches:
           - nodemodules
         script:
@@ -32,10 +32,10 @@ definitions:
         image:
           name: ubuntu:19.04
         script:
-          - docker login -u $KRJURA_NEXUS3_USERNAME -p $KRJURA_NEXUS3_PASSWORD docker.krjura.org
+          - docker login -u $KRJURA_DOCKER_IO_USERNAME -p $KRJURA_DOCKER_IO_PASSWORD
           - bash infrastructure/bitbucket/docker-prepare-dist.sh
-          - docker build -t docker.krjura.org/dev-tools/dev-tools:$BITBUCKET_BUILD_NUMBER .
-          - docker push docker.krjura.org/dev-tools/dev-tools:$BITBUCKET_BUILD_NUMBER
+          - docker build -t krjura/dev-tools:$BITBUCKET_BUILD_NUMBER .
+          - docker push krjura/dev-tools:$BITBUCKET_BUILD_NUMBER
         services:
           - docker
 pipelines:

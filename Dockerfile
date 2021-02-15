@@ -1,4 +1,4 @@
-FROM docker.krjura.org/dev-tools/java-exec-env:v2
+FROM krjura/dev-tools-java-exec-env:v2
 
 LABEL maintainer="Krešimir Jurasović <krjura@outlook.com>"
 
