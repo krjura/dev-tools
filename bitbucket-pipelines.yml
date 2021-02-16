@@ -30,7 +30,7 @@ definitions:
     - step: &build-docker
         name: "Build docker"
         image:
-          name: ubuntu:19.04
+          name: krjura/dev-tools-java-build-env:v3
         script:
           - docker login -u $KRJURA_DOCKER_IO_USERNAME -p $KRJURA_DOCKER_IO_PASSWORD
           - bash infrastructure/bitbucket/docker-prepare-dist.sh
