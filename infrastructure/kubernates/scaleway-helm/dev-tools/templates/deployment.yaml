@@ -45,6 +45,9 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
           resources:
+            limits:
+              memory: {{ .Values.containers.default.resources.limits.memory | quote }}
+              cpu: {{ .Values.containers.default.resources.limits.cpu | quote }}
             requests:
               memory: {{ .Values.containers.default.resources.requests.memory | quote }}
               cpu: {{ .Values.containers.default.resources.requests.cpu | quote }}

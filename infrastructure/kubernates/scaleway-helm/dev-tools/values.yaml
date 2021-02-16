@@ -23,10 +23,13 @@ ingress:
 containers:
   default:
     name: "dev-tools"
-    image: "rg.fr-par.scw.cloud/krjura/dev-tools/dev-tools:18"
+    image: "krjura/dev-tools:27"
     imagePullSecrets: "regcred"
     port: 25000
     resources:
+      limits:
+        memory: "500Mi"
+        cpu: "1000m"
       requests:
         memory: "500Mi"
         cpu: "100m"
