@@ -85,6 +85,9 @@ spec:
            {{- range $.Values.containers.default.env }}
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
-           {{- end }}              
+           {{- end }}
+          envFrom:
+            - secretRef:
+                name: "monitoring-secrets"
       imagePullSecrets:
         - name: {{ .Values.containers.default.imagePullSecrets | quote }}
