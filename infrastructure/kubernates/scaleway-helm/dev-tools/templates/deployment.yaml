@@ -19,9 +19,11 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: {{ .Values.labels.app | quote }}
+      annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: {{ .Values.containers.default.port | quote }}
-        metrics-exporter: "micrometer-prometheus"
+        prometheus.io/scheme: "http"
+        prometheus.io/path: "/actuator/prometheus"
     spec:
       securityContext:
         runAsNonRoot: {{ .Values.deployment.securityContext.runAsNonRoot }}
