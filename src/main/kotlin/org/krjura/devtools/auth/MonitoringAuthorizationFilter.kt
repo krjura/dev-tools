@@ -39,7 +39,7 @@ class MonitoringAuthorizationFilter(private val config: SecurityConfiguration) :
     private fun findAuthorizationHeader(request: HttpServletRequest): String? {
         val header = request.getHeader(AuthorizationConstants.HEADER_AUTHORIZATION)
 
-        return if (header == null || !header.startsWith(AuthorizationConstants.HEADER_PARAM_MONITORING)) {
+        return if (header == null || !header.startsWith(AuthorizationConstants.HEADER_PARAM_BEARER)) {
             null
         } else {
             header
@@ -50,7 +50,7 @@ class MonitoringAuthorizationFilter(private val config: SecurityConfiguration) :
     private fun handleHeaderBasedAuthorization(
         header: String, request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
 
-        val authToken = header.substring(AuthorizationConstants.HEADER_PARAM_MONITORING.length)
+        val authToken = header.substring(AuthorizationConstants.HEADER_PARAM_BEARER.length)
 
         if(config.monitoring.tokens.contains(authToken)) {
             val token = UsernamePasswordAuthenticationToken(monitoringPrincipal, "", monitoringAuthority)

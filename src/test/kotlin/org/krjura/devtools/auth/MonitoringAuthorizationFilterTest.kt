@@ -35,7 +35,7 @@ class MonitoringAuthorizationFilterTest: TestBase() {
         val response = mock(HttpServletResponse::class.java)
         val chain = mock(FilterChain::class.java)
 
-        `when`(request.getHeader(HEADER_AUTHORIZATION)).thenReturn("Monitoring $token")
+        `when`(request.getHeader(HEADER_AUTHORIZATION)).thenReturn("Bearer $token")
         `when`(request.dispatcherType).thenReturn(DispatcherType.REQUEST)
 
         // when
