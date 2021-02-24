@@ -8,9 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.logout.ForwardLogoutSuccessHandler
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
 
-
-
-
 @Configuration
 @EnableWebSecurity
 class WebSecurityConfig(private val config: SecurityConfiguration): WebSecurityConfigurerAdapter() {

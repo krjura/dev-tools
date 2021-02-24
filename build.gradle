@@ -47,9 +47,6 @@ dependencies {
 
     // micrometer
     implementation 'io.micrometer:micrometer-registry-prometheus'
-
-    // security
-    implementation 'com.auth0:java-jwt:3.13.0'
     
     // logging
     implementation 'org.slf4j:slf4j-api'

@@ -25,7 +25,6 @@ import { CopyToClipboardComponent } from './shared/components/copy-to-clipboard/
 import { DownloadBinaryComponent } from './shared/components/download-binary/download-binary.component';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { GlobalHubService } from './shared/services/global-hub.service';
-import { GlobalNavbarLinksComponent } from './shared/components/global-navbar-links/global-navbar-links.component';
 import { HroibComponent } from './pages/hroib/hroib.component';
 
 @NgModule({
@@ -40,7 +39,6 @@ import { HroibComponent } from './pages/hroib/hroib.component';
     PkiKeyGeneratorComponent,
     CopyToClipboardComponent,
     DownloadBinaryComponent,
-    GlobalNavbarLinksComponent,
     HroibComponent
   ],
   imports: [
