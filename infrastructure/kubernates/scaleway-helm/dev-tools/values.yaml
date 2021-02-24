@@ -23,7 +23,7 @@ ingress:
 containers:
   default:
     name: "dev-tools"
-    image: "krjura/dev-tools:29"
+    image: "krjura/dev-tools:31"
     imagePullSecrets: "regcred"
     port: 25000
     resources:
