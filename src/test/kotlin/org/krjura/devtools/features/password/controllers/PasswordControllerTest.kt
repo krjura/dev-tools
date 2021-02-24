@@ -18,6 +18,7 @@ class PasswordControllerTest: TestBase() {
             useCapitalLetters = true,
             useSmallLetters = true,
             useNumbers = true,
+            useSpecial = true,
             characterCount = 20
         )
 
@@ -35,7 +36,7 @@ class PasswordControllerTest: TestBase() {
         assertThat(response).isNotNull
 
         response.let {
-            assertThat(response.password).containsPattern("[A-Za-z0-9]{20}")
+            assertThat(response.password).containsPattern("[A-Za-z0-9#$]{20}")
         }
     }
 }

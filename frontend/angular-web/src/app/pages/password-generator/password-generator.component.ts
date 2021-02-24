@@ -45,6 +45,7 @@ export class PasswordGeneratorComponent  implements OnInit {
       useCapitalLetters: [true],
       useSmallLetters: [true],
       useNumbers: [true],
+      useSpecial: [false],
       characterCount: [defaultCharacterCount, [Validators.required]]
     });
   }
@@ -61,6 +62,7 @@ export class PasswordGeneratorComponent  implements OnInit {
       useCapitalLetters: this.form.controls.useCapitalLetters.value,
       useSmallLetters: this.form.controls.useSmallLetters.value,
       useNumbers: this.form.controls.useNumbers.value,
+      useSpecial: this.form.controls.useSpecial.value,
       characterCount: this.form.controls.characterCount.value,
     };
 

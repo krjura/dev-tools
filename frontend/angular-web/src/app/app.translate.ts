@@ -82,6 +82,7 @@ export const translateEn = {
           useCapitalLetters: 'Use capital letters (A, B, C, ...)',
           useSmallLetters: 'Use small letters (a, b, c, ...)',
           useNumbers: 'Use numbers (0, 1, 2, 3, ...)',
+          useSpecial: 'Use special characters (#, $, ...)',
           length: 'Length of password',
           submit: 'Generate'
         }

@@ -7,4 +7,5 @@ data class PasswordRequest(
     @Required val useCapitalLetters: Boolean,
     @Required val useSmallLetters: Boolean,
     @Required val useNumbers: Boolean,
+    @Required val useSpecial: Boolean,
     @PasswordCharacterCount val characterCount: Int)
