@@ -26,6 +26,7 @@ import { DownloadBinaryComponent } from './shared/components/download-binary/dow
 import { AuthenticationService } from './shared/services/authentication.service';
 import { GlobalHubService } from './shared/services/global-hub.service';
 import { HroibComponent } from './pages/hroib/hroib.component';
+import { JsonpfComponent } from './pages/jsonpf/jsonpf.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HroibComponent } from './pages/hroib/hroib.component';
     PkiKeyGeneratorComponent,
     CopyToClipboardComponent,
     DownloadBinaryComponent,
-    HroibComponent
+    HroibComponent,
+    JsonpfComponent
   ],
   imports: [
     BrowserModule,

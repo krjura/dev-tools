@@ -7,6 +7,7 @@ import { PasswordGeneratorComponent } from './pages/password-generator/password-
 import { UuidGeneratorComponent } from './pages/uuid-generator/uuid-generator.component';
 import { PkiKeyGeneratorComponent } from './pages/pki-key-generator/pki-key-generator.component';
 import { HroibComponent } from './pages/hroib/hroib.component';
+import { JsonpfComponent } from './pages/jsonpf/jsonpf.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,11 @@ const routes: Routes = [
   {
     path: 'op/hr-oib',
     component: HroibComponent
-  }
+  },
+  {
+      path: 'op/jsonpf',
+      component: JsonpfComponent
+    }
 ];
 
 @NgModule({

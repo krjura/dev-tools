@@ -26,7 +26,8 @@ export const translateEn = {
     passwordGenerator: 'Password Generator',
     uuidGenerator: 'UUID Generator',
     pkiKeyGenerator: 'PKI Key Generator',
-    hrOib: 'HR OIB'
+    hrOib: 'HR OIB',
+    jsonpf: "JSON Formatter"
   },
   pages: {
     hroib: {
@@ -132,6 +133,18 @@ export const translateEn = {
         password: 'Password:',
         iterations: 'Iterations:',
         encodedData: 'Encoded data'
+      }
+    },
+    jsonpf: {
+      pageHeader: 'JSON Formatter',
+      panelHeading: 'Raw JSON',
+      form: {
+        data: "Raw JSON",
+        dataHelpBlock: "Please enter JSON data!",
+        submit: "Format"
+      },
+      result: {
+        title: "Formatted JSON data"
       }
     }
   }
