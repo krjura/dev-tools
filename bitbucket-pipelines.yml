@@ -12,9 +12,9 @@ definitions:
         caches:
           - gradleall
         script:
-          - bash ./gradlew --no-daemon --info -Dspring.profiles.active=test,jenkins build bootJar
+          - bash ./gradlew --no-daemon --info -Dspring.profiles.active=test,jenkins build installDist
         artifacts:
-          - build/libs/**
+          - build/install/**
     - step: &build-angular
         name: "Build Angular"
         image:
@@ -33,7 +33,6 @@ definitions:
           name: krjura/dev-tools-java-build-env:v3
         script:
           - docker login -u $KRJURA_DOCKER_IO_USERNAME -p $KRJURA_DOCKER_IO_PASSWORD
-          - bash infrastructure/bitbucket/docker-prepare-dist.sh
           - docker build -t krjura/dev-tools:$BITBUCKET_BUILD_NUMBER .
           - docker push krjura/dev-tools:$BITBUCKET_BUILD_NUMBER
         services:

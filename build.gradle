@@ -20,6 +20,7 @@ apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'application'
 
 group = 'org.krjura.devtools'
 version = '1.0'
@@ -112,5 +113,9 @@ def buildVersionCalculator() {
     println "version is now ${updatedVersion}";
 
     return updatedVersion;
+}
+
+application {
+    mainClass = 'org.krjura.devtools.DevToolsRoot'
 }
 
