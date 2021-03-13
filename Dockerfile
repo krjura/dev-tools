@@ -1,4 +1,4 @@
-FROM krjura/dev-tools-java-exec-env:v2
+FROM krjura/dev-tools-java-exec-env:v3
 
 LABEL maintainer="Krešimir Jurasović <krjura@outlook.com>"
 

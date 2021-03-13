@@ -6,7 +6,7 @@ definitions:
     - step: &build-and-test-java
         name: "Build and test Java"
         image:
-          name: krjura/dev-tools-java-build-env:v3
+          name: krjura/dev-tools-java-build-env:v4
           username: $KRJURA_DOCKER_IO_USERNAME
           password: $KRJURA_DOCKER_IO_PASSWORD
         caches:
@@ -18,7 +18,7 @@ definitions:
     - step: &build-angular
         name: "Build Angular"
         image:
-          name: krjura/dev-tools-angular-build-env:v2
+          name: krjura/dev-tools-angular-build-env:v3
           username: $KRJURA_DOCKER_IO_USERNAME
           password: $KRJURA_DOCKER_IO_PASSWORD
         caches:
@@ -30,7 +30,7 @@ definitions:
     - step: &build-docker
         name: "Build docker"
         image:
-          name: krjura/dev-tools-java-build-env:v3
+          name: krjura/dev-tools-java-build-env:v4
         script:
           - docker login -u $KRJURA_DOCKER_IO_USERNAME -p $KRJURA_DOCKER_IO_PASSWORD
           - docker build -t krjura/dev-tools:$BITBUCKET_BUILD_NUMBER .

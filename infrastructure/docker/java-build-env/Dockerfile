@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk15:x86_64-alpine-jdk-15.0.1_9
+FROM adoptopenjdk/openjdk15:x86_64-alpine-jre-15.0.2_7
 
 RUN apk add git bash
 
