@@ -30,7 +30,7 @@ definitions:
     - step: &build-docker
         name: "Build docker"
         image:
-          name: krjura/dev-tools-java-build-env:v4
+          name: alpine:3.12.4
         script:
           - docker login -u $KRJURA_DOCKER_IO_USERNAME -p $KRJURA_DOCKER_IO_PASSWORD
           - docker build -t krjura/dev-tools:$BITBUCKET_BUILD_NUMBER .
