@@ -61,11 +61,17 @@
             <textarea
               id="resultData"
               name="resultData"
-              class="expand-textarea"
+              class="expand-textarea-with-resize"
               [value]="formattedJson"
-              rows="4">
+              rows="8">
 
             </textarea>
+          </div>
+          <div class="col-md-12 mt-2">
+            <app-copy-to-clipboard
+              [data]="formattedJson">
+
+            </app-copy-to-clipboard>
           </div>
         </div>
       </div>
