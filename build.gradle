@@ -21,6 +21,7 @@ apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'application'
+apply plugin: 'kotlin-kapt'
 
 group = 'org.krjura.devtools'
 version = '1.0'
@@ -40,15 +41,19 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
 
     // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "org.jetbrains.kotlin:kotlin-reflect"
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
 
     // javax.validation
     implementation 'org.hibernate:hibernate-validator:6.0.13.Final'
 
     // micrometer
     implementation 'io.micrometer:micrometer-registry-prometheus'
-    
+
+    // annotation processors
+    kapt 'org.springframework.boot:spring-boot-configuration-processor'
+    kapt 'org.springframework.boot:spring-boot-autoconfigure-processor'
+
     // logging
     implementation 'org.slf4j:slf4j-api'
     implementation 'ch.qos.logback:logback-classic'
