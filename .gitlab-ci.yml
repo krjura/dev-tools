@@ -8,7 +8,7 @@ java_build:
   image: krjura/java-17-build-env:1.0.0
   stage: build
   tags:
-    - docker
+    - docker_small
   artifacts:
     name: "$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG-java"
     expire_in: "1 day"
@@ -24,7 +24,7 @@ angular_build_test_deploy:
   image: krjura/angular-build-env:16.3-b1
   stage: build
   tags:
-    - docker
+    - docker_small
   only:
     - master
   artifacts:
