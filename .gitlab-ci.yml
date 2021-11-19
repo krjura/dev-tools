@@ -2,6 +2,7 @@ variables:
   GRADLE_USER_HOME: "/opt/cache/gradle"
 
 cache:
+  key: $CI_JOB_NAME
   paths:
     - /opt/cache/gradle
     - frontend/angular-web/node_modules
