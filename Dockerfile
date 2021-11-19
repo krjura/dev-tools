@@ -1,6 +1,6 @@
-FROM krjura/dev-tools-java-exec-env:v3
+FROM krjura/java-17-exec-env:1.0.0
 
-LABEL maintainer="Krešimir Jurasović <krjura@outlook.com>"
+LABEL maintainer="Krešimir Jurasović <krjura@protonmail.com>"
 
 ENV HOME=/opt/dev-tools \
     USER=dt \

@@ -1,8 +1,8 @@
 buildscript {
 
     ext {
-        kotlinVersion = '1.4.30'
-        springBootVersion = '2.4.2'
+        kotlinVersion = '1.6.0'
+        springBootVersion = '2.5.7'
     }
 
     repositories {
@@ -24,13 +24,16 @@ apply plugin: 'application'
 apply plugin: 'kotlin-kapt'
 
 group = 'org.krjura.devtools'
-version = '1.0'
-
-sourceCompatibility = JavaVersion.VERSION_15
-targetCompatibility = JavaVersion.VERSION_15
+version = '1.1'
 
 repositories {
     mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 dependencies {
@@ -66,19 +69,37 @@ dependencies {
 compileKotlin {
     kotlinOptions {
         freeCompilerArgs = ['-Xjsr305=strict']
-        jvmTarget = '15'
+        jvmTarget = '16'
     }
 }
 
 compileTestKotlin {
     kotlinOptions {
         freeCompilerArgs = ['-Xjsr305=strict']
-        jvmTarget = '15'
+        jvmTarget = '16'
     }
 }
 
 test {
     useJUnitPlatform()
+
+    testLogging {
+        events "FAILED", "PASSED", "SKIPPED", "STANDARD_OUT"
+        exceptionFormat "FULL"
+        showExceptions true
+        showCauses true
+        showStackTraces true
+
+        info {
+            events "FAILED", "PASSED", "SKIPPED", "STANDARD_OUT"
+            exceptionFormat "FULL"
+        }
+
+        debug {
+            events "FAILED", "PASSED", "SKIPPED", "STANDARD_OUT"
+            exceptionFormat "FULL"
+        }
+    }
 }
 
 jar {
@@ -86,8 +107,8 @@ jar {
 }
 
 bootJar {
-    classifier = 'boot'
-    archiveName = 'devtools-root-boot.jar'
+    classifier('boot')
+    archiveName('devtools-root-boot.jar')
 }
 
 // Custom scripts
