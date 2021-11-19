@@ -163,5 +163,11 @@ jib {
             }
         }
     }
+    platforms {
+        platform {
+            architecture = 'amd64'
+            os = 'linux'
+        }
+    }
 }
 
