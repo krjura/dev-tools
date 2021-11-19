@@ -31,7 +31,7 @@ angular_build_test_deploy:
     paths:
       - "frontend/angular-web/dist"
   cache:
-    key: $CI_JOB_NAME
+    key: "cache-$CI_JOB_NAME-angular"
     when: 'on_success'
     paths:
       - frontend/angular-web/node_modules
