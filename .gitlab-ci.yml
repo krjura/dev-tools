@@ -1,0 +1,17 @@
+variables:
+  GRADLE_USER_HOME: "/opt/cache/gradle"
+
+cache:
+  paths:
+    - /opt/cache/gradle
+    - frontend/angular-web/node_modules
+
+java_build_test_deploy:
+  image: krjura/java-17-build-env:1.0.0
+  stage: build
+  tags:
+    - docker
+  only:
+    - master
+  script:
+    - bash ./gradlew --no-daemon --info -Dspring.profiles.active=test,jenkins build installDist
