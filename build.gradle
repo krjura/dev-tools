@@ -3,9 +3,13 @@ buildscript {
     ext {
         kotlinVersion = '1.6.0'
         springBootVersion = '2.5.7'
+        jibVersion = '3.1.4'
     }
 
     repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
         mavenCentral()
     }
 
@@ -13,6 +17,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
     }
 }
 
@@ -20,11 +25,15 @@ apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'application'
 apply plugin: 'kotlin-kapt'
+apply plugin: "com.google.cloud.tools.jib"
 
 group = 'org.krjura.devtools'
 version = '1.1'
+
+ext {
+    customVersion = buildVersionCalculator()
+}
 
 repositories {
     mavenCentral()
@@ -84,54 +93,33 @@ test {
     useJUnitPlatform()
 
     testLogging {
-        events "FAILED", "PASSED", "SKIPPED", "STANDARD_OUT"
-        exceptionFormat "FULL"
+        events 'FAILED', 'PASSED', 'SKIPPED', 'STANDARD_OUT'
+        exceptionFormat 'FULL'
         showExceptions true
         showCauses true
         showStackTraces true
 
         info {
-            events "FAILED", "PASSED", "SKIPPED", "STANDARD_OUT"
-            exceptionFormat "FULL"
+            events 'FAILED', 'PASSED', 'SKIPPED', 'STANDARD_OUT'
+            exceptionFormat 'FULL'
         }
 
         debug {
-            events "FAILED", "PASSED", "SKIPPED", "STANDARD_OUT"
-            exceptionFormat "FULL"
+            events 'FAILED', 'PASSED', 'SKIPPED', 'STANDARD_OUT'
+            exceptionFormat 'FULL'
         }
     }
-}
-
-jar {
-    enabled = true
-}
-
-bootJar {
-    classifier('boot')
-    archiveName('devtools-root-boot.jar')
 }
 
 // Custom scripts
 def buildVersionCalculator() {
 
-    println "calculating build version"
+    println 'calculating build version'
 
-    def buildNumber = System.env.BUILD_NUMBER;
+    def buildNumber = System.env.CI_PIPELINE_IID;
 
     if(buildNumber == null) {
-        println "BUILD_NUMBER not set failing back to default version";
-        return project.version;
-    }
-
-    if(!buildNumber.isNumber() ) {
-        println "BUILD_NUMBER ${System.env.BUILD_NUMBER} is not a number";
-        return project.version;
-    }
-
-    buildNumber = buildNumber as int;
-
-    if(buildNumber <= 0) {
-        println("BUILD_NUMBER must be larger then 0 but was ${buildNumber}");
+        println 'CI_PIPELINE_IID not set failing back to default version';
         return project.version;
     }
 
@@ -141,7 +129,39 @@ def buildVersionCalculator() {
     return updatedVersion;
 }
 
-application {
-    mainClass = 'org.krjura.devtools.DevToolsRoot'
+jib {
+    containerizingMode = 'packaged'
+    from {
+        image = 'docker.io/krjura/java-17-exec-env:1.0.0'
+        auth {
+            username = System.getenv().getOrDefault('HUB_DOCKER_KRJURA_USERNAME', 'none')
+            password = System.getenv().getOrDefault('HUB_DOCKER_KRJURA_PASSWORD', 'none')
+        }
+    }
+    to {
+        image = "docker.io/krjura/dev-tools:${project.ext.customVersion}"
+        auth {
+            username = System.getenv().getOrDefault('HUB_DOCKER_KRJURA_USERNAME', 'none')
+            password = System.getenv().getOrDefault('HUB_DOCKER_KRJURA_PASSWORD', 'none')
+        }
+    }
+    container {
+        appRoot = '/opt/app'
+        creationTime = 'EPOCH'
+        filesModificationTime = 'EPOCH_PLUS_SECOND'
+        format = 'OCI'
+        jvmFlags = ['-Xdebug']
+        mainClass = 'org.krjura.devtools.DevToolsRootKt'
+        user = '1000'
+        workingDirectory = '/opt/app'
+    }
+    extraDirectories {
+        paths {
+            path {
+                from = file('frontend/angular-web/dist/angular-web')
+                into = '/opt/app/web-resources'
+            }
+        }
+    }
 }
 
