@@ -3,8 +3,8 @@ stages:
   - dist
 
 variables:
-  GRADLE_USER_HOME: "/opt/runner-cache/$CI_PROJECT_NAME-$CI_JOB_NAME/gradle"
-  JIB_CACHE_DIR: "/opt/runner-cache/$CI_PROJECT_NAME-$CI_JOB_NAME/jib"
+  GRADLE_USER_HOME: "/opt/runner-cache/$CI_PROJECT_NAME/gradle"
+  JIB_CACHE_DIR: "/opt/runner-cache/$CI_PROJECT_NAME/jib"
 
 java_build:
   image: krjura/java-17-build-env:1.0.0
@@ -60,4 +60,4 @@ create_distribution:
     - java_build
     - angular_build
   script:
-    - bash ./gradlew --no-daemon --info jib -Djib.console=plain -Djib.applicationCache=${JIB_CACHE_DIR}/app -Djib.baseImageCache=${JIB_CACHE_DIR}/base
+    - bash ./gradlew --no-daemon --info jib -Djib.applicationCache=${JIB_CACHE_DIR}/app -Djib.baseImageCache=${JIB_CACHE_DIR}/base
