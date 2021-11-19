@@ -1,13 +1,6 @@
 variables:
   GRADLE_USER_HOME: "/opt/runner-cache/$CI_JOB_NAME/gradle"
 
-cache:
-  key: $CI_JOB_NAME
-  when: 'on_success'
-  paths:
-    - /opt/cache/gradle
-    - frontend/angular-web/node_modules
-
 java_build_test_deploy:
   image: krjura/java-17-build-env:1.0.0
   stage: build
@@ -37,5 +30,10 @@ angular_build_test_deploy:
     when: on_success
     paths:
       - "frontend/angular-web/dist"
+  cache:
+    key: $CI_JOB_NAME
+    when: 'on_success'
+    paths:
+      - frontend/angular-web/node_modules
   script:
     - bash ./frontend/angular-web/build-frontend.sh
