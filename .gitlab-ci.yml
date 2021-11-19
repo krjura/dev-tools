@@ -1,21 +1,36 @@
+stages:
+  - build
+  - dist
+
 variables:
   GRADLE_USER_HOME: "/opt/runner-cache/$CI_PROJECT_NAME-$CI_JOB_NAME/gradle"
 
-java_build_test_deploy:
+java_build:
   image: krjura/java-17-build-env:1.0.0
   stage: build
   tags:
     - docker
-  only:
-    - master
   artifacts:
     name: "$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG-java"
     expire_in: "1 day"
     when: on_success
     paths:
-      - "build/install"
+      - "build"
+  dependencies: []
   script:
     - bash ./gradlew --no-daemon --info -Dspring.profiles.active=test,jenkins build installDist
+
+java_dist:
+  image: krjura/java-17-build-env:1.0.0
+  stage: dist
+  tags:
+    - docker
+  only:
+    - master
+  dependencies:
+    - java_build
+  script:
+    - bash ./gradlew --no-daemon --info installDist
 
 angular_build_test_deploy:
   image: krjura/angular-build-env:16.3-b1
@@ -36,5 +51,6 @@ angular_build_test_deploy:
     paths:
       - frontend/angular-web/node_modules
       - frontend/angular-web/package-lock.json
+  dependencies: []
   script:
     - bash ./frontend/angular-web/build-frontend.sh
