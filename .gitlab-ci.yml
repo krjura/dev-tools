@@ -35,5 +35,6 @@ angular_build_test_deploy:
     when: 'on_success'
     paths:
       - frontend/angular-web/node_modules
+      - frontend/angular-web/package-lock.json
   script:
     - bash ./frontend/angular-web/build-frontend.sh
