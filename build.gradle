@@ -149,7 +149,7 @@ jib {
         appRoot = '/opt/app'
         creationTime = 'EPOCH'
         filesModificationTime = 'EPOCH_PLUS_SECOND'
-        format = 'OCI'
+        format = 'Docker'
         jvmFlags = ['-Xdebug']
         mainClass = 'org.krjura.devtools.DevToolsRootKt'
         user = '1000'
@@ -161,12 +161,6 @@ jib {
                 from = file('frontend/angular-web/dist/angular-web')
                 into = '/opt/app/web-resources'
             }
-        }
-    }
-    platforms {
-        platform {
-            architecture = 'amd64'
-            os = 'linux'
         }
     }
 }
