@@ -20,7 +20,7 @@ java_build:
   dependencies: []
   needs: []
   script:
-    - bash ./gradlew --no-daemon --info -Dspring.profiles.active=test,jenkins build installDist
+    - bash ./gradlew --no-daemon --info -Dspring.profiles.active=test,jenkins build
 
 angular_build:
   image: krjura/angular-build-env:16.3-b1
