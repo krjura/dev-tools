@@ -1,5 +1,5 @@
 variables:
-  GRADLE_USER_HOME: "/opt/cache/gradle"
+  GRADLE_USER_HOME: "/opt/runner-cache/$CI_JOB_NAME/gradle"
 
 cache:
   key: $CI_JOB_NAME
