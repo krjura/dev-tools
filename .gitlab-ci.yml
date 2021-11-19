@@ -17,6 +17,7 @@ java_build:
     paths:
       - "build"
   dependencies: []
+  needs: []
   script:
     - bash ./gradlew --no-daemon --info -Dspring.profiles.active=test,jenkins build installDist
 
@@ -28,6 +29,8 @@ java_dist:
   only:
     - master
   dependencies:
+    - java_build
+  needs:
     - java_build
   script:
     - bash ./gradlew --no-daemon --info installDist
@@ -52,5 +55,6 @@ angular_build_test_deploy:
       - frontend/angular-web/node_modules
       - frontend/angular-web/package-lock.json
   dependencies: []
+  needs: []
   script:
     - bash ./frontend/angular-web/build-frontend.sh
