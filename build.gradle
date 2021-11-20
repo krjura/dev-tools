@@ -4,6 +4,7 @@ buildscript {
         kotlinVersion = '1.6.0'
         springBootVersion = '2.5.7'
         jibVersion = '3.1.4'
+        sonarqubeVersion = '3.3'
     }
 
     repositories {
@@ -18,6 +19,7 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
         classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarqubeVersion}"
     }
 }
 
@@ -26,7 +28,9 @@ apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'kotlin-kapt'
-apply plugin: "com.google.cloud.tools.jib"
+apply plugin: 'com.google.cloud.tools.jib'
+apply plugin: 'org.sonarqube'
+apply plugin: 'jacoco'
 
 group = 'org.krjura.devtools'
 version = '1.1'
@@ -42,6 +46,13 @@ repositories {
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
     }
 }
 
@@ -109,6 +120,8 @@ test {
             exceptionFormat 'FULL'
         }
     }
+
+    finalizedBy jacocoTestReport
 }
 
 // Custom scripts
@@ -162,6 +175,22 @@ jib {
                 into = '/opt/app/web-resources'
             }
         }
+    }
+}
+
+sonarqube {
+    properties {
+        property 'sonar.host.url', System.getenv('SONAR_HOST_URL')
+        property 'sonar.login', System.getenv('SONAR_TOKEN')
+        property 'sonar.organization', 'm5828'
+        property 'sonar.projectName', 'dev-tools'
+        property 'sonar.projectKey', 'm5828_dev-tools'
+        property 'sonar.sourceEncoding', 'UTF-8'
+        property 'sonar.projectVersion', project.ext.customVersion
+        property 'sonar.java.coveragePlugin', 'jacoco'
+        property 'sonar.dynamicAnalysis', 'reuseReports'
+        property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/*.xml'
+        property 'sonar.language', 'kotlin'
     }
 }
 
