@@ -132,7 +132,7 @@ def buildVersionCalculator() {
 jib {
     containerizingMode = 'packaged'
     from {
-        image = 'docker.io/krjura/java-17-exec-env:1.0.0'
+        image = 'docker.io/krjura/java-17-exec-env:1.1.0'
         auth {
             username = System.getenv().getOrDefault('HUB_DOCKER_KRJURA_USERNAME', 'none')
             password = System.getenv().getOrDefault('HUB_DOCKER_KRJURA_PASSWORD', 'none')
