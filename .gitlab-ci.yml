@@ -32,6 +32,7 @@ angular_build:
     - docker_small
   only:
     - master
+    - /^frontend\/.*$/
   artifacts:
     name: "$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG-angular"
     expire_in: "1 day"
