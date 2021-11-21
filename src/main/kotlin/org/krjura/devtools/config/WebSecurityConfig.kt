@@ -27,7 +27,7 @@ class WebSecurityConfig(private val config: SecurityConfiguration): WebSecurityC
 
         http
             .headers()
-            .contentSecurityPolicy("default-src 'self'; style-src 'self' 'unsafe-inline'");
+            .contentSecurityPolicy("default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'");
 
         /* at the moment not working with web flux
         http

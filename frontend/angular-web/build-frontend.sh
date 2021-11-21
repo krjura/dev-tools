@@ -10,4 +10,4 @@ echo "Users temporary home is $HOME"
 rm -rf dist
 
 npm install
-npm run ng -- build --base-href /portal
+npm run ng -- build --base-href /portal --deploy-url=/portal/
