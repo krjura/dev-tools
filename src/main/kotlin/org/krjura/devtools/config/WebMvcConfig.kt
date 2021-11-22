@@ -17,12 +17,12 @@ class WebMvcConfig : WebMvcConfigurer {
             .cachePrivate();
 
         registry
-            .addResourceHandler("/portal/*.js", "/portal/*.css", "/portal/*.woff", "/portal/*.woff2")
+            .addResourceHandler("/*.js", "/*.css")
             .addResourceLocations("file:web-resources/")
             .setCacheControl(cacheControl);
 
         registry
-            .addResourceHandler("/portal/**")
+            .addResourceHandler("/favicon.ico", "/*.svg", "/*.woff2", "/*.ttf", "/*.eot", "/*.woff", "/index.html")
             .addResourceLocations("file:web-resources/")
             .setCacheControl(CacheControl.noCache());
     }

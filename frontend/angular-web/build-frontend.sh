@@ -11,6 +11,7 @@ echo "Users temporary home is $HOME"
 # delete dist
 rm -rf dist
 
+npm install --global npm@8.1.0
+npm install @angular/cli@13.0.3
 npm install
-npm install @angular/cli
-npm run ng -- build --base-href /portal --deploy-url=/portal/
+npm run ng -- build
