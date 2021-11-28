@@ -23,8 +23,8 @@ java_build:
   dependencies: []
   needs: []
   script:
-    - bash ./gradlew --no-daemon --info -Dspring.profiles.active=test build jacocoTestReport
-    - bash ./gradlew --no-daemon --info -Dspring.profiles.active=test sonarqube
+    - bash ./gradlew --no-daemon --info --build-cache -Dspring.profiles.active=test build jacocoTestReport
+    - bash ./gradlew --no-daemon --info --build-cache -Dspring.profiles.active=test sonarqube
 
 angular_build:
   image: krjura/angular-build-env:16.3-b1
