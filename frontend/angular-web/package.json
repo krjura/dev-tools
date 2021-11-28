@@ -1,13 +1,14 @@
 {
-  "name": "angular-web",
+  "name": "angular-web-two",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "start": "ng serve",
     "start-dev": "ng serve --proxy-config proxy-dev.conf.json",
     "build": "ng build",
-    "test": "ng test",
+    "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -20,9 +21,9 @@
     "@angular/platform-browser-dynamic": "13.0.2",
     "@angular/router": "13.0.2",
     "@ngx-translate/core": "14.0.0",
-    "ngx-clipboard": "14.0.2",
+    "ngx-clipboard": "15.0.0-beta03",
     "ngx-toastr": "14.2.1",
-    "rxjs": "6.6.3",
+    "rxjs": "7.4.0",
     "tslib": "2.3.1",
     "zone.js": "0.11.4"
   },
@@ -33,15 +34,19 @@
     "@angular-eslint/eslint-plugin-template": "13.0.1",
     "@angular-eslint/schematics": "13.0.1",
     "@angular-eslint/template-parser": "13.0.1",
-    "@angular/cli": "^13.0.3",
+    "@angular/cli": "13.0.3",
     "@angular/compiler-cli": "13.0.2",
-    "@angular/language-service": "13.0.2",
+    "@types/jasmine": "3.10.2",
+    "@types/node": "12.11.7",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
-    "eslint": "8.3.0",
+    "eslint": "^8.2.0",
+    "jasmine-core": "3.10.1",
     "karma": "6.3.9",
     "karma-chrome-launcher": "3.1.0",
-    "protractor": "7.0.0",
+    "karma-coverage": "2.0.3",
+    "karma-jasmine": "4.0.1",
+    "karma-jasmine-html-reporter": "1.7.0",
     "typescript": "4.4.4"
   }
 }
