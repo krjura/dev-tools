@@ -1,0 +1,16 @@
+name: Gradle Build
+on: [push]
+jobs:
+  gradle-build:
+    runs-on: "ubuntu-latest"
+    container:
+      image: "krjura/java-17-build-env:1.0.0"
+    steps:
+      - name: "Check out repository code"
+        uses: "actions/checkout@v2"
+      - name: "pwd"
+        run: pwd
+      - name: "Build project"
+        run: ./gradlew --no-daemon --info --build-cache -Dspring.profiles.active=test build jacocoTestReport
+      - name: "pwd"
+        run: pwd
