@@ -17,7 +17,7 @@ jobs:
         with:
           path: |
             /opt/build/.gradle
-          key: dev-tools-${{ runner.os }}-${{ hashFiles('**/build.gradle') }}
+          key: dev-tools-${{ runner.os }}-${{ hashFiles('/opt/build/build.gradle') }}
           restore-keys: |
             dev-tools-${{ runner.os }}-
       - run: pwd
