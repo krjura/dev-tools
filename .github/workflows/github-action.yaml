@@ -13,7 +13,7 @@ jobs:
         with:
           path: |
             ~/.gradle
-          key: "dev-tools"
+          key: "dev-tools-${{ runner.os }}-${{ hashFiles('**/build.gradle') }}"
       - run: pwd
       - run: env
 
