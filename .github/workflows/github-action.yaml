@@ -22,10 +22,10 @@ jobs:
             dev-tools-${{ runner.os }}-
       - run: pwd
       - run: env
-      - run: find /opt/build -type d -ls
 
       - name: "Build project"
         run: ./gradlew --no-daemon --info --build-cache -Dspring.profiles.active=test build jacocoTestReport
 
       - run: pwd
       - run: env
+      - run: find /opt/build -type f
