@@ -5,6 +5,8 @@ jobs:
     runs-on: "ubuntu-latest"
     container:
       image: "eclipse-temurin:17.0.2_8-jdk-focal"
+      env:
+        GRADLE_USER_HOME: "{{ github.workspace }}/.gradle"
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v2"
@@ -12,8 +14,10 @@ jobs:
         uses: "actions/cache@v2"
         with:
           path: |
-            ~/.gradle
+            "{{ github.workspace }}/.gradle"
           key: "dev-tools-${{ runner.os }}-${{ hashFiles('**/build.gradle') }}"
+          restore-keys: |
+            dev-tools-${{ runner.os }}-
       - run: pwd
       - run: env
 
