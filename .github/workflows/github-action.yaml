@@ -8,9 +8,17 @@ jobs:
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v2"
-      - name: "pwd"
-        run: pwd
+      - name: "Cache"
+        uses: "actions/cache@v2"
+        with:
+          path: |
+            ~/.gradle
+          key: "dev-tools"
+      - run: pwd
+      - run: env
+
       - name: "Build project"
         run: ./gradlew --no-daemon --info --build-cache -Dspring.profiles.active=test build jacocoTestReport
-      - name: "pwd"
-        run: pwd
+        
+      - run: pwd
+      - run: env
