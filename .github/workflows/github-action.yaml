@@ -21,7 +21,6 @@ jobs:
           restore-keys: |
             dev-tools-${{ runner.os }}-
       - run: pwd
-      - run: export GRADLE_USER_HOME=$GITHUB_WORKSPACE/.gradle
       - run: env
 
       - name: "Build project"
