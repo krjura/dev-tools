@@ -5,8 +5,10 @@ jobs:
     runs-on: "ubuntu-latest"
     container:
       image: "eclipse-temurin:17.0.2_8-jdk-focal"
+      volumes:
+        - ${{ github.workspace }}:/opt/build
       env:
-        GRADLE_USER_HOME: ${{ github.workspace }}/.gradle
+        GRADLE_USER_HOME: /opt/build/.gradle
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v2"
@@ -14,11 +16,12 @@ jobs:
         uses: "actions/cache@v2"
         with:
           path: |
-            ${{ github.workspace }}/.gradle
+            /opt/build/.gradle
           key: dev-tools-${{ runner.os }}-${{ hashFiles('**/build.gradle') }}
           restore-keys: |
             dev-tools-${{ runner.os }}-
       - run: pwd
+      - run: export GRADLE_USER_HOME=$GITHUB_WORKSPACE/.gradle
       - run: env
 
       - name: "Build project"
