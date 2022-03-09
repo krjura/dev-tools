@@ -4,7 +4,7 @@ jobs:
   gradle-build:
     runs-on: "ubuntu-latest"
     container:
-      image: "krjura/java-17-build-env:1.0.0"
+      image: "eclipse-temurin:17.0.2_8-jdk-focal"
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v2"
@@ -19,6 +19,6 @@ jobs:
 
       - name: "Build project"
         run: ./gradlew --no-daemon --info --build-cache -Dspring.profiles.active=test build jacocoTestReport
-        
+
       - run: pwd
       - run: env
